@@ -1,5 +1,6 @@
-package com.example.letscode.questao;
+package com.example.letscode.model.historico;
 
+import com.example.letscode.model.aluno.Aluno;
 import com.example.letscode.disciplina.Disciplina;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,25 +14,22 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-public class Questao {
+public class Historico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(columnDefinition="TEXT", nullable = false)
-    private String enunciado;
+    @Column(name = "percentual_acerto", nullable = false)
+    private Double percentualAcerto;
     @ManyToOne
     @JoinColumn(name = "disciplina_id", nullable = false)
     private Disciplina disciplina;
+    @ManyToOne
+    @JoinColumn(name = "aluno_id", nullable = false)
+    private Aluno aluno;
 
-    public Questao(String enunciado, Disciplina disciplina) {
-        this.enunciado = enunciado;
+    public Historico(Double percentualAcerto, Disciplina disciplina, Aluno aluno) {
+        this.percentualAcerto = percentualAcerto;
         this.disciplina = disciplina;
-    }
-
-    @Override
-    public String toString(){
-        String res = "Questao " + this.id + " da disciplina " + this.disciplina.getNome() + "\n\r" +
-                this.enunciado + "\n\r";
-        return res;
+        this.aluno = aluno;
     }
 }

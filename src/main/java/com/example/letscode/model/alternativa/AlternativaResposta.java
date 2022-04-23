@@ -1,4 +1,4 @@
-package com.example.letscode.alternativa;
+package com.example.letscode.model.alternativa;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

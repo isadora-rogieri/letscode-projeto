@@ -1,6 +1,6 @@
-package com.example.letscode.disciplina;
+package com.example.letscode.repository;
 
-import com.example.letscode.professor.Professor;
+import com.example.letscode.disciplina.Disciplina;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

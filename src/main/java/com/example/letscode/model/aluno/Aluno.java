@@ -1,4 +1,4 @@
-package com.example.letscode.aluno;
+package com.example.letscode.model.aluno;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

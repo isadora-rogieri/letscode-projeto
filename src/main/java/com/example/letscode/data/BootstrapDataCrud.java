@@ -1,10 +1,10 @@
 package com.example.letscode.data;
 
-import com.example.letscode.alternativa.Alternativa;
-import com.example.letscode.aluno.Aluno;
+import com.example.letscode.model.alternativa.Alternativa;
+import com.example.letscode.model.aluno.Aluno;
 import com.example.letscode.disciplina.Disciplina;
-import com.example.letscode.professor.Professor;
-import com.example.letscode.questao.Questao;
+import com.example.letscode.model.professor.Professor;
+import com.example.letscode.model.questao.Questao;
 
 import java.time.LocalDate;
 import java.util.List;

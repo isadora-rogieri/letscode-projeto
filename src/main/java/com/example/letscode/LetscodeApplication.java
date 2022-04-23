@@ -1,16 +1,16 @@
 package com.example.letscode;
 
-import com.example.letscode.alternativa.Alternativa;
-import com.example.letscode.alternativa.AlternativaRepository;
-import com.example.letscode.aluno.Aluno;
-import com.example.letscode.aluno.AlunoRepository;
+import com.example.letscode.model.alternativa.Alternativa;
+import com.example.letscode.repository.AlternativaRepository;
+import com.example.letscode.model.aluno.Aluno;
+import com.example.letscode.repository.AlunoRepository;
 import com.example.letscode.data.BootstrapDataCrud;
 import com.example.letscode.disciplina.Disciplina;
-import com.example.letscode.disciplina.DisciplinaRepository;
-import com.example.letscode.professor.Professor;
-import com.example.letscode.professor.ProfessorRepository;
-import com.example.letscode.questao.Questao;
-import com.example.letscode.questao.QuestaoRepository;
+import com.example.letscode.repository.DisciplinaRepository;
+import com.example.letscode.model.professor.Professor;
+import com.example.letscode.repository.ProfessorRepository;
+import com.example.letscode.model.questao.Questao;
+import com.example.letscode.repository.QuestaoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

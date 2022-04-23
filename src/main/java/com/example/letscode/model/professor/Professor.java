@@ -1,4 +1,4 @@
-package com.example.letscode.professor;
+package com.example.letscode.model.professor;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

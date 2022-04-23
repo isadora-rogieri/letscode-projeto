@@ -1,6 +1,6 @@
 package com.example.letscode.disciplina;
 
-import com.example.letscode.professor.Professor;
+import com.example.letscode.model.professor.Professor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

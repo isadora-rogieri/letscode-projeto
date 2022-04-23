@@ -1,5 +1,6 @@
-package com.example.letscode.professor;
+package com.example.letscode.repository;
 
+import com.example.letscode.model.professor.Professor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
