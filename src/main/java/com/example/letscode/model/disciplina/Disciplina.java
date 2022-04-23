@@ -1,4 +1,4 @@
-package com.example.letscode.disciplina;
+package com.example.letscode.model.disciplina;
 
 import com.example.letscode.model.professor.Professor;
 import lombok.Getter;

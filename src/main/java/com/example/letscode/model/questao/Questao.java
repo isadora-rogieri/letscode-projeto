@@ -1,6 +1,6 @@
 package com.example.letscode.model.questao;
 
-import com.example.letscode.disciplina.Disciplina;
+import com.example.letscode.model.disciplina.Disciplina;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

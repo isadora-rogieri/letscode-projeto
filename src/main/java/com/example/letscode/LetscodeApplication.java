@@ -5,7 +5,7 @@ import com.example.letscode.repository.AlternativaRepository;
 import com.example.letscode.model.aluno.Aluno;
 import com.example.letscode.repository.AlunoRepository;
 import com.example.letscode.data.BootstrapDataCrud;
-import com.example.letscode.disciplina.Disciplina;
+import com.example.letscode.model.disciplina.Disciplina;
 import com.example.letscode.repository.DisciplinaRepository;
 import com.example.letscode.model.professor.Professor;
 import com.example.letscode.repository.ProfessorRepository;
