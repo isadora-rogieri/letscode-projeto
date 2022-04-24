@@ -1,7 +1,7 @@
-package com.example.letscode.model.historico;
+package com.example.letscode.model;
 
-import com.example.letscode.model.aluno.Aluno;
-import com.example.letscode.model.disciplina.Disciplina;
+import com.example.letscode.model.Aluno;
+import com.example.letscode.model.Disciplina;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

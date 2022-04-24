@@ -1,6 +1,6 @@
 package com.example.letscode.controller;
 
-import com.example.letscode.model.professor.Professor;
+import com.example.letscode.model.Professor;
 import com.example.letscode.service.ProfessorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

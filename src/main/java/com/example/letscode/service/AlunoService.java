@@ -1,7 +1,7 @@
 package com.example.letscode.service;
 
 import com.example.letscode.exception.AlunoNaoEncontradoException;
-import com.example.letscode.model.aluno.Aluno;
+import com.example.letscode.model.Aluno;
 import com.example.letscode.repository.AlunoRepository;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +28,13 @@ public class AlunoService {
         aluno.setNome(alunoRequest.getNome());
         this.salvarAluno(aluno);
     }
-    public void deletarAluno(Integer id){
+    public Aluno deletarAluno(Integer id){
         Aluno aluno = selecionaAluno(id);
         this.alunoRepository.delete(aluno);
+        return aluno;
+    }
+
+    public Aluno selecionarAlunoById(Integer id) {
+        return this.alunoRepository.findById(id).orElseThrow(AlunoNaoEncontradoException::new);
     }
 }

@@ -1,6 +1,5 @@
-package com.example.letscode.model.alternativa;
+package com.example.letscode.model;
 
-import com.example.letscode.model.questao.Questao;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

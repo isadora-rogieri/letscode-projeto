@@ -1,7 +1,7 @@
 package com.example.letscode.service;
 
 import com.example.letscode.exception.ProfessorNaoEncontradoException;
-import com.example.letscode.model.professor.Professor;
+import com.example.letscode.model.Professor;
 import com.example.letscode.repository.ProfessorRepository;
 import org.springframework.stereotype.Service;
 
