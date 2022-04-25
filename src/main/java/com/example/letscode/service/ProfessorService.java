@@ -33,14 +33,20 @@ public class ProfessorService {
         }
     }
 
-    public void alterarProfessor(Integer id, Professor professorRequest){
+    public Professor alterarProfessor(Integer id, Professor professorRequest){
         Professor professor = this.selecionarProfessor(id);
         professor.setNome(professorRequest.getNome());
         this.salvarProfessor(professor);
+        return professor;
     }
 
-    public void deletarProfessor(Integer id){
+    public Professor deletarProfessor(Integer id){
         Professor professor = selecionarProfessor(id);
         this.professorRepository.delete(professor);
-        }
+        return professor;
+    }
+
+    public Professor selecionarProfessorById(Integer id) {
+        return this.professorRepository.findById(id).orElseThrow(ProfessorNaoEncontradoException::new);
+    }
 }

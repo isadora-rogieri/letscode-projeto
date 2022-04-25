@@ -24,16 +24,17 @@ public class DisciplinaController {
         ResponseEntity response = new ResponseEntity("Disciplina criada com sucesso", HttpStatus.CREATED);
         return response;
     }
+
     @GetMapping
     public List<Disciplina> listarDisciplinas(){
         return this.disciplinaService.listarTodos();
     }
-    @GetMapping("{id}")
+
+    @GetMapping("/{id}")
     public ResponseEntity selecionarDisciplinaById(@PathVariable("id") Integer id){
         Disciplina disciplina =  this.disciplinaService.selecionarDisciplinaById(id);
         ResponseEntity response = new ResponseEntity(disciplina, HttpStatus.OK);
         return  response;
-
     }
 
     @PutMapping("/{id}")
@@ -42,8 +43,9 @@ public class DisciplinaController {
         ResponseEntity response = new ResponseEntity(disciplina, HttpStatus.OK);
         return  response;
     }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity deletarDiscipplina(@PathVariable("id") Integer idDisciplina){
+    public ResponseEntity deletarDisciplina(@PathVariable("id") Integer idDisciplina){
        Disciplina disciplina = this.disciplinaService.deletarDisciplina(idDisciplina);
        ResponseEntity response = new ResponseEntity("Disciplina deletada com sucesso", HttpStatus.OK);
        return  response;

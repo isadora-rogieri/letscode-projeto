@@ -5,6 +5,7 @@ import com.example.letscode.service.AlunoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
 
 import java.util.List;
 
@@ -17,11 +18,10 @@ public class AlunoController {
         this.alunoService = alunoService;
     }
 
-
     @PostMapping
-    public ResponseEntity salvar(@RequestBody Aluno aluno) {
+    public ResponseEntity salvar(@Valid @RequestBody Aluno aluno) {
         this.alunoService.salvarAluno(aluno);
-        ResponseEntity response = new ResponseEntity("Aluno criado com sucesso", HttpStatus.CREATED);
+        ResponseEntity response = new ResponseEntity("Aluno salvo com sucesso", HttpStatus.CREATED);
         return response;
     }
 
@@ -30,8 +30,8 @@ public class AlunoController {
         return this.alunoService.listarTodos();
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity selecionarDisciplinaById(@PathVariable("id") Integer id) {
+    @GetMapping("/{id}")
+    public ResponseEntity selecionarAlunoById(@PathVariable("id") Integer id) {
         Aluno aluno = this.alunoService.selecionarAlunoById(id);
         ResponseEntity response = new ResponseEntity(aluno, HttpStatus.OK);
         return response;
