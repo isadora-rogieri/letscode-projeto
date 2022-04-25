@@ -12,6 +12,7 @@ import java.util.List;
 public interface ProfessorRepository extends JpaRepository<Professor, Integer> {
     Professor findProfessorById(Integer id);
 
+    public boolean existsByNome(String nome);
     List<Professor> findByNomeEquals(String nome);
     @Query("SELECT p FROM Professor p WHERE p.nome LIKE %:nome%")
     List<Professor> findProfessorByNome(@Param("nome") String nome);

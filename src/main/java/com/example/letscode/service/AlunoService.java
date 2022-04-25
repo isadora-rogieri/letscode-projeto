@@ -1,5 +1,6 @@
 package com.example.letscode.service;
 
+import com.example.letscode.exception.AlunoJaExisteException;
 import com.example.letscode.exception.AlunoNaoEncontradoException;
 import com.example.letscode.model.Aluno;
 import com.example.letscode.repository.AlunoRepository;
@@ -21,7 +22,11 @@ public class AlunoService {
         return this.alunoRepository.findAll();
     }
     public void salvarAluno(Aluno aluno){
-        this.alunoRepository.save(aluno);
+        if(!this.alunoRepository.existsByMatricula(aluno.getMatricula())) {
+            this.alunoRepository.save(aluno);
+        }else{
+            throw new AlunoJaExisteException();
+        }
     }
     public void alterarAluno(Integer id, Aluno alunoRequest){
         Aluno aluno = this.selecionaAluno(id);

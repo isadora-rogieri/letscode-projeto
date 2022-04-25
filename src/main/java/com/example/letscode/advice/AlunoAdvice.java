@@ -1,5 +1,6 @@
 package com.example.letscode.advice;
 
+import com.example.letscode.exception.AlunoJaExisteException;
 import com.example.letscode.exception.AlunoNaoEncontradoException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,11 @@ public class AlunoAdvice {
     @ExceptionHandler
     public ResponseEntity tratarExcecao(AlunoNaoEncontradoException e){
         ResponseEntity response = new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+        return response;
+    }
+    @ExceptionHandler
+    public ResponseEntity tratarExcecao(AlunoJaExisteException e){
+        ResponseEntity response = new ResponseEntity(e.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
         return response;
     }
 }
