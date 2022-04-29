@@ -1,3 +1,33 @@
+-----------
+# Projeto final - Módulo Programação Web II
+-----------
+ 
+Este é o repositório do nosso projeto final do Módulo de Programação Web do curso da Lets's Code.
+A proposta é dar continuação ao projeto anterior do grupo Cinza, desenvolvendo para essa aplicação uma API REST.
+
+### Integrantes do grupo - Squad VERDE 🍀 :
+```
+° Camily Aleixo Randi 
+° Everton Sebastião do Nascimento 
+° Gabriela Trindade Ferreira 
+° Isadora Oliveira Rogieri 
+```
+
+&nbsp;
+
+## Durante nosso desenvolvimento adicionamos:
+
+ 
+    ⬛  Rest endpoints especificos para cada operação de um CRUD - RestFul style.
+    ⬛  Métodos HTTP de acordo com a operação.
+    ⬛  Códigos de status HTTP na resposta de cada operação.
+    ⬛  Classes services para tratamento das regras de negócio e lançar as exceções necessárias.
+    ⬛  Tratamento de exceções com as anotações spring.
+    ⬛  Logs do projeto.
+ 
+ &nbsp;
+-----------------------
+
 # Projeto 3 - Let's Code
 
 ## Autores
