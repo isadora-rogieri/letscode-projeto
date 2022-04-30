@@ -13,7 +13,7 @@ public interface DisciplinaRepository extends JpaRepository<Disciplina, Integer>
     Disciplina findDisciplinaById(Integer id);
 
     public boolean existsByNome(String nome);
-
+    public boolean existsByProfessorId(Integer id);
     List<Disciplina> findByNomeEquals(String nome);
 
     @Query("SELECT d.id FROM Disciplina d WHERE d.nome LIKE %:nome%")

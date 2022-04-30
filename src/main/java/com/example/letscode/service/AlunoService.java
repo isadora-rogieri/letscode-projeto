@@ -4,16 +4,17 @@ import com.example.letscode.exception.AlunoJaExisteException;
 import com.example.letscode.exception.AlunoNaoEncontradoException;
 import com.example.letscode.model.Aluno;
 import com.example.letscode.repository.AlunoRepository;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.logging.Logger;
+
 
 @Service
 public class AlunoService {
     private final AlunoRepository alunoRepository;
-//    private final Logger LOGGER = (Logger) LoggerFactory.getLogger(AlunoService.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(AlunoService.class);
 
     public AlunoService(AlunoRepository alunoRepository) {
         this.alunoRepository = alunoRepository;
@@ -27,24 +28,30 @@ public class AlunoService {
     }
 
     public void salvarAluno(Aluno aluno){
-//        LOGGER.info("Início do método salvar");
+        LOGGER.info("Início do método salvar Aluno");
         if(!this.alunoRepository.existsByMatricula(aluno.getMatricula())) {
             this.alunoRepository.save(aluno);
         }else{
             throw new AlunoJaExisteException();
         }
+        LOGGER.info("Aluno salvo com sucesso");
     }
 
     public void alterarAluno(Integer id, Aluno alunoRequest){
+        LOGGER.info("Início do método alterar");
         Aluno aluno = this.selecionaAluno(id);
         aluno.setNome(alunoRequest.getNome());
         this.salvarAluno(aluno);
+        LOGGER.info("Aluno alterado com sucesso");
     }
 
     public Aluno deletarAluno(Integer id){
+        LOGGER.info("Início do método deletar");
         Aluno aluno = selecionaAluno(id);
         this.alunoRepository.delete(aluno);
+        LOGGER.info("Aluno deletado com sucesso");
         return aluno;
+
     }
 
     public Aluno selecionarAlunoById(Integer id) {

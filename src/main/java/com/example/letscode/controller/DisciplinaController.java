@@ -1,11 +1,13 @@
 package com.example.letscode.controller;
 
 import com.example.letscode.model.Disciplina;
+import com.example.letscode.model.Professor;
 import com.example.letscode.service.DisciplinaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -19,7 +21,7 @@ public class DisciplinaController {
     }
 
     @PostMapping
-    public ResponseEntity salvar(@RequestBody Disciplina disciplina){
+    public ResponseEntity salvar(@Valid @RequestBody Disciplina disciplina){
         this.disciplinaService.salvarDisciplina(disciplina);
         ResponseEntity response = new ResponseEntity("Disciplina criada com sucesso", HttpStatus.CREATED);
         return response;
