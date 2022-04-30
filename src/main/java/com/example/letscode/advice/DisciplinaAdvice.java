@@ -2,7 +2,6 @@ package com.example.letscode.advice;
 
 import com.example.letscode.exception.DisciplinaJaExisteException;
 import com.example.letscode.exception.DisciplinaNaoEncontradaException;
-import com.example.letscode.exception.ProfessorNaoEncontradoException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -30,6 +29,7 @@ public class DisciplinaAdvice {
         ResponseEntity response = new ResponseEntity(e.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
         return  response;
     }
+
     @ExceptionHandler
     public ResponseEntity tratarRestricoesBean(MethodArgumentNotValidException e){
         Map<String, String> erros = new HashMap<>();
@@ -45,5 +45,4 @@ public class DisciplinaAdvice {
 
         return new ResponseEntity(erros, HttpStatus.BAD_REQUEST);
     }
-
 }

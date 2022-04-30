@@ -29,6 +29,7 @@ public class QuestaoService {
     }
 
     public Questao salvarQuestao(Questao questao) {
+        LOGGER.info("Início do método salvar - Questão");
         if(!(this.questaoRepository.existsByEnunciado(questao.getEnunciado())
             || this.questaoRepository.existsById(questao.getId()))){
             Questao questaoSalva = this.questaoRepository.save(questao);
@@ -40,6 +41,7 @@ public class QuestaoService {
     }
 
     public Questao atualizarQuestao(Integer id, Questao questaoAtualizada) {
+        LOGGER.info("Início do método atualizar - Questão");
         Questao questao = this.buscarQuestaoporId(id);
         questao.setEnunciado(questaoAtualizada.getEnunciado());
         questao.setDisciplina(questaoAtualizada.getDisciplina());
@@ -50,6 +52,7 @@ public class QuestaoService {
     }
 
     public void deletarQuestao(Integer id) {
+        LOGGER.info("Início do método deletar - Questão");
         Questao questao = this.buscarQuestaoporId(id);
         this.questaoRepository.delete(questao);
         LOGGER.info("Questao " + id + " deletada com sucesso");

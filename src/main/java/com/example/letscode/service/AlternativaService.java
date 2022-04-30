@@ -34,7 +34,6 @@ public class AlternativaService {
         return this.alternativaRepository.findById(id).orElseThrow(AlternativaNaoEncontradaException::new);
     }
 
-
     public Alternativa salvarAlternativa(Alternativa alternativa) {
         List<Alternativa> list = this.buscarAlternativasPorQuestaoId(alternativa.getQuestao().getId());
         List<Alternativa> lista = list.stream()
@@ -43,12 +42,11 @@ public class AlternativaService {
 
         if(lista.isEmpty() && !(this.alternativaRepository.existsById(alternativa.getId()))) {
             Alternativa alternativaSalva = this.alternativaRepository.save(alternativa);
-            LOGGER.info("Alternativa " + alternativaSalva.getId() + " Salva com sucesso");
+            LOGGER.info("Alternativa " + alternativaSalva.getId() + " salva com sucesso");
             return alternativaSalva;
         } else {
             throw new AlternativaJaExisteException();
         }
-
     }
 
     public Alternativa atualizarAlternativa(Integer id, Alternativa alternativa) {
@@ -67,5 +65,4 @@ public class AlternativaService {
         this.alternativaRepository.delete(alternativaBd);
         LOGGER.info("Alternativa " + alternativaBd.getId() + " deletada com sucesso");
     }
-
 }

@@ -34,14 +34,14 @@ public class QuestaoController {
     @PostMapping
     public ResponseEntity salvarQuestao(@Valid @RequestBody Questao questao){
         this.questaoService.salvarQuestao(questao);
-        ResponseEntity response = new ResponseEntity("Questão salva com sucesso!" ,HttpStatus.CREATED);
+        ResponseEntity response = new ResponseEntity("Questão salva com sucesso!", HttpStatus.CREATED);
         return response;
     }
 
     @PutMapping("{id}")
     public ResponseEntity atualizarQuestao(@PathVariable("id") Integer id, @Valid @RequestBody Questao questao){
         this.questaoService.atualizarQuestao(id, questao);
-        ResponseEntity response = new ResponseEntity("Questão atualizada com sucesso" , HttpStatus.OK);
+        ResponseEntity response = new ResponseEntity("Questão atualizada com sucesso", HttpStatus.OK);
         return response;
     }
 

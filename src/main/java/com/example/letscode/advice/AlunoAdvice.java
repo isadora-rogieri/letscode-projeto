@@ -17,7 +17,7 @@ import java.util.Map;
 @ControllerAdvice
 public class AlunoAdvice {
 
-//    private final Logger LOGGER = LoggerFactory.getLogger(AlunoAdvice.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(AlunoAdvice.class);
 
     @ExceptionHandler
     public ResponseEntity tratarExcecao(AlunoNaoEncontradoException e){
@@ -41,7 +41,7 @@ public class AlunoAdvice {
             String errorMessage = ((FieldError) e.getBindingResult().getAllErrors().get(indice)).getDefaultMessage();
             String erroFormatado = String.format("Erro no campo %s - %s",fieldName,errorMessage);
             erros.put(String.format("Erro %s ",indice ), String.format("Erro no campo %s - %s",fieldName,errorMessage));
-//            LOGGER.debug(erroFormatado);
+            LOGGER.debug(erroFormatado);
         }
 
         return new ResponseEntity(erros, HttpStatus.BAD_REQUEST);

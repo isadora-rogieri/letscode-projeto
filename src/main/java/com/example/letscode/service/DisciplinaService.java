@@ -33,36 +33,35 @@ public class DisciplinaService {
     }
 
     public void salvarDisciplina(Disciplina disciplina) {
-        LOGGER.info("Início do método salvar da disciplina");
+        LOGGER.info("Início do método salvar - Disciplina");
         if(!this.disciplinaRepository.existsByNome(disciplina.getNome())   &&
-         this.disciplinaRepository.existsByProfessorId(disciplina.getProfessor().getId())
-        ){
+         this.disciplinaRepository.existsByProfessorId(disciplina.getProfessor().getId())){
 
             this.disciplinaRepository.save(disciplina);
 
         }else if(this.disciplinaRepository.existsByNome(disciplina.getNome())){
             throw new DisciplinaJaExisteException();
         }else{
-
             throw new ProfessorNaoEncontradoException();
         }
         LOGGER.info("Disciplina salva com sucesso");
     }
 
     public Disciplina alterarDisciplina(Integer id, Disciplina disciplinaRequest){
-        LOGGER.info("Início do método alterar Disciplina");
+        LOGGER.info("Início do método alterar  - Disciplina");
         Disciplina disciplina = this.selecionarDisciplina(id);
         disciplina.setNome(disciplinaRequest.getNome());
-       this.salvarDisciplina(disciplina);
+        this.salvarDisciplina(disciplina);
         LOGGER.info("Disciplina alterada com sucesso");
         return disciplina;
 
     }
 
     public Disciplina deletarDisciplina(Integer id){
-        LOGGER.info("Início do método deletar Disciplina");
+        LOGGER.info("Início do método deletar - Disciplina");
         Disciplina disciplina = selecionarDisciplina(id);
         this.disciplinaRepository.delete(disciplina);
+        LOGGER.info("Disciplina deletada com sucesso");
         return disciplina;
     }
 

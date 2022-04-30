@@ -28,7 +28,7 @@ public class AlunoService {
     }
 
     public void salvarAluno(Aluno aluno){
-        LOGGER.info("Início do método salvar Aluno");
+        LOGGER.info("Início do método salvar - Aluno");
         if(!this.alunoRepository.existsByMatricula(aluno.getMatricula())) {
             this.alunoRepository.save(aluno);
         }else{
@@ -38,7 +38,7 @@ public class AlunoService {
     }
 
     public void alterarAluno(Integer id, Aluno alunoRequest){
-        LOGGER.info("Início do método alterar");
+        LOGGER.info("Início do método alterar - Aluno");
         Aluno aluno = this.selecionaAluno(id);
         aluno.setNome(alunoRequest.getNome());
         this.salvarAluno(aluno);
@@ -46,12 +46,11 @@ public class AlunoService {
     }
 
     public Aluno deletarAluno(Integer id){
-        LOGGER.info("Início do método deletar");
+        LOGGER.info("Início do método deletar - Aluno");
         Aluno aluno = selecionaAluno(id);
         this.alunoRepository.delete(aluno);
         LOGGER.info("Aluno deletado com sucesso");
         return aluno;
-
     }
 
     public Aluno selecionarAlunoById(Integer id) {
