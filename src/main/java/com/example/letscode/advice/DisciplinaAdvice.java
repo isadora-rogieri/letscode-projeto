@@ -26,7 +26,7 @@ public class DisciplinaAdvice {
 
     @ExceptionHandler
     public ResponseEntity tratarExcecao(DisciplinaJaExisteException e){
-        ResponseEntity response = new ResponseEntity(e.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
+        ResponseEntity response = new ResponseEntity(e.getMessage(), HttpStatus.CONFLICT);
         return  response;
     }
 

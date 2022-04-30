@@ -8,6 +8,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import java.util.Objects;
 
+@AllArgsConstructor
 @ToString
 @NoArgsConstructor
 @Getter

@@ -1,13 +1,11 @@
 package com.example.letscode.model;
 
 import com.example.letscode.model.Disciplina;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
+@AllArgsConstructor
 @ToString
 @NoArgsConstructor
 @Getter
