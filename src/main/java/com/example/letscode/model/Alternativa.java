@@ -1,11 +1,12 @@
 package com.example.letscode.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @ToString
 @NoArgsConstructor
@@ -22,6 +23,7 @@ public class Alternativa {
     private Boolean ehResposta;
     @ManyToOne
     @JoinColumn(name = "questao_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Questao questao;
 
     public Alternativa(String descricao, Boolean ehResposta, Questao questao) {
@@ -29,4 +31,5 @@ public class Alternativa {
         this.ehResposta = ehResposta;
         this.questao = questao;
     }
+
 }

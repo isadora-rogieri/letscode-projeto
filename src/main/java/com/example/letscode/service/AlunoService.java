@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 @Service
 public class AlunoService {
     private final AlunoRepository alunoRepository;
-    private final Logger LOGGER = (Logger) LoggerFactory.getLogger(AlunoService.class);
+//    private final Logger LOGGER = (Logger) LoggerFactory.getLogger(AlunoService.class);
 
     public AlunoService(AlunoRepository alunoRepository) {
         this.alunoRepository = alunoRepository;
@@ -27,7 +27,7 @@ public class AlunoService {
     }
 
     public void salvarAluno(Aluno aluno){
-        LOGGER.info("Início do método salvar");
+//        LOGGER.info("Início do método salvar");
         if(!this.alunoRepository.existsByMatricula(aluno.getMatricula())) {
             this.alunoRepository.save(aluno);
         }else{
