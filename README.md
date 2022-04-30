@@ -1,5 +1,5 @@
 -----------
-# Projeto final - Módulo Programação Web II
+# Projeto final 4 - Módulo Programação Web II
 -----------
  
 Este é o repositório do nosso projeto final do Módulo de Programação Web do curso da Lets's Code.
@@ -13,19 +13,23 @@ A proposta é dar continuação ao projeto anterior do grupo Cinza, desenvolvend
 ° Isadora Oliveira Rogieri 
 ```
 
-&nbsp;
 
 ## Durante nosso desenvolvimento adicionamos:
 
  
-    ⬛  Rest endpoints especificos para cada operação de um CRUD - RestFul style.
-    ⬛  Métodos HTTP de acordo com a operação.
-    ⬛  Códigos de status HTTP na resposta de cada operação.
-    ⬛  Classes services para tratamento das regras de negócio e lançar as exceções necessárias.
-    ⬛  Tratamento de exceções com as anotações spring.
-    ⬛  Logs do projeto.
+    ✅  Rest endpoints especificos para cada operação de um CRUD - RestFul style.
+    ✅  Métodos HTTP de acordo com a operação.
+    ✅  Códigos de status HTTP na resposta de cada operação.
+    ✅  Classes services para tratamento das regras de negócio e lançar as exceções necessárias.
+    ✅  Tratamento de exceções com as anotações spring.
+    ✅  Logs do projeto.
+    ✅  Objetos Dto para tranferência de dados.
  
- &nbsp;
+  &nbsp;
+
+ 
+ ### Projeto Base:
+
 -----------------------
 
 # Projeto 3 - Let's Code
