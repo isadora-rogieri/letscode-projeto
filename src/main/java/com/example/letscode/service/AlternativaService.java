@@ -27,10 +27,12 @@ public class AlternativaService {
 
 
     public List<Alternativa> buscarAlternativasPorQuestaoId(Integer questaoId) {
+        LOGGER.info("Buscando alternativa por questão", questaoId);
         return this.alternativaRepository.findAllByQuestaoId(questaoId);
     }
 
     public Alternativa buscarAlternativaPorId(Integer id) {
+        LOGGER.info("Buscando alternativa pelo ID {}", id);
         return this.alternativaRepository.findById(id).orElseThrow(AlternativaNaoEncontradaException::new);
     }
 

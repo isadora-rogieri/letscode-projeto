@@ -19,7 +19,9 @@ public class AlunoService {
     public AlunoService(AlunoRepository alunoRepository) {
         this.alunoRepository = alunoRepository;
     }
+
     public Aluno selecionaAluno(Integer id){
+        LOGGER.info("Selecionando aluno pelo ID {}", id);
         return this.alunoRepository.findById(id).orElseThrow(AlunoNaoEncontradoException::new);
     }
 
@@ -54,6 +56,7 @@ public class AlunoService {
     }
 
     public Aluno selecionarAlunoById(Integer id) {
+        LOGGER.info("Selecionando aluno pelo ID {}", id);
         return this.alunoRepository.findById(id).orElseThrow(AlunoNaoEncontradoException::new);
     }
 }

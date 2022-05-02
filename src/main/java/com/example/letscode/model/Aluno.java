@@ -1,5 +1,6 @@
 package com.example.letscode.model;
 
+import com.example.letscode.validator.MatriculaConstraint;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,7 +9,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
 @ToString
@@ -28,6 +29,8 @@ public class Aluno {
     @Column
     @NotBlank(message = "Matrícula não informada")
     @Length(max = 10, message = "Quantidade máxima de caracteres excedida")
+    @Pattern(regexp = "^MTLA\\d{6}$", message = "Formato da matrícula não aceito - Formato aceito MTLAXXXXXX")
+    //@MatriculaConstraint
     private String matricula;
 
     @Column(name = "data_nascimento", nullable = false)

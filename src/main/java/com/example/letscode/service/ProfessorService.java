@@ -21,6 +21,7 @@ public class ProfessorService {
     }
 
     public Professor selecionarProfessor(Integer id){
+        LOGGER.info("Selecionando Professor pelo ID ", id);
         return this.professorRepository.findById(id).orElseThrow(ProfessorNaoEncontradoException::new);
     }
 
@@ -56,6 +57,7 @@ public class ProfessorService {
     }
 
     public Professor selecionarProfessorById(Integer id) {
+        LOGGER.info("Selecionando Professor pelo ID {}", id);
         return this.professorRepository.findById(id).orElseThrow(ProfessorNaoEncontradoException::new);
     }
 }

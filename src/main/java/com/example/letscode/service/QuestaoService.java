@@ -25,6 +25,7 @@ public class QuestaoService {
     }
 
     public Questao buscarQuestaoporId(Integer id) {
+        LOGGER.info("Selecionando Questão pelo ID ", id);
         return this.questaoRepository.findById(id).orElseThrow(QuestaoNaoEncontradaException::new);
     }
 

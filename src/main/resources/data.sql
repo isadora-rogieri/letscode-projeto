@@ -1,10 +1,10 @@
-INSERT INTO aluno (nome, matricula, data_nascimento) VALUES ('Carlos Miller', '20220406', '1976-04-17');
-INSERT INTO aluno (nome, matricula, data_nascimento) VALUES ('Humayra Coombes', '20220405', '1976-04-17');
-INSERT INTO aluno (nome, matricula, data_nascimento) VALUES ('Heidi Gonzalez', '20220407', '1999-12-22');
-INSERT INTO aluno (nome, matricula, data_nascimento) VALUES ('Zoe Mueller', '20220408', '1976-11-27');
-INSERT INTO aluno (nome, matricula, data_nascimento) VALUES ('Hadiqa Richards', '20220409', '1996-04-15');
-INSERT INTO aluno (nome, matricula, data_nascimento) VALUES ('Livia Christensen', '20220410', '1995-01-28');
-INSERT INTO aluno (nome, matricula, data_nascimento) VALUES ('Alastair Spencer', '20220411', '1974-09-05');
+INSERT INTO aluno (nome, matricula, data_nascimento) VALUES ('Carlos Miller', 'MTLA220406', '1976-04-17');
+INSERT INTO aluno (nome, matricula, data_nascimento) VALUES ('Humayra Coombes', 'MTLA220405', '1976-04-17');
+INSERT INTO aluno (nome, matricula, data_nascimento) VALUES ('Heidi Gonzalez', 'MTLA220407', '1999-12-22');
+INSERT INTO aluno (nome, matricula, data_nascimento) VALUES ('Zoe Mueller', 'MTLA220408', '1976-11-27');
+INSERT INTO aluno (nome, matricula, data_nascimento) VALUES ('Hadiqa Richards', 'MTLA220409', '1996-04-15');
+INSERT INTO aluno (nome, matricula, data_nascimento) VALUES ('Livia Christensen', 'MTLA220410', '1995-01-28');
+INSERT INTO aluno (nome, matricula, data_nascimento) VALUES ('Alastair Spencer', 'MTLA220411', '1974-09-05');
 
 INSERT INTO professor (nome) VALUES ('Jessé');
 INSERT INTO professor (nome) VALUES ('Justine Mcdowell');
