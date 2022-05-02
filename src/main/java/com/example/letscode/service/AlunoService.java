@@ -43,7 +43,7 @@ public class AlunoService {
         LOGGER.info("Início do método alterar - Aluno");
         Aluno aluno = this.selecionaAluno(id);
         aluno.setNome(alunoRequest.getNome());
-        this.salvarAluno(aluno);
+        this.alunoRepository.save(aluno);
         LOGGER.info("Aluno alterado com sucesso");
     }
 
