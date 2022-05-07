@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface AlunoRepository extends JpaRepository<Aluno, Integer> {
-    Aluno findAlunoById(Integer id);
+     Optional<Aluno> findAlunoById(Integer id);
 
     List<Aluno> findByNomeEquals(String nome);
 

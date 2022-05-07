@@ -9,5 +9,9 @@ class LetscodeApplicationTests {
 	@Test
 	void contextLoads() {
 	}
+	@Test
+	void init() {
+	}
+
 
 }

@@ -29,7 +29,7 @@ public class DisciplinaService {
 
     public Disciplina selecionarDisciplina(Integer id){
         LOGGER.info("Selecionando Disciplina pelo ID {}", id);
-        return this.disciplinaRepository.findById(id).orElseThrow(DisciplinaNaoEncontradaException::new);
+        return this.disciplinaRepository.findDisciplinaById(id).orElseThrow(DisciplinaNaoEncontradaException::new);
 
     }
 

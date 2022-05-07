@@ -20,28 +20,31 @@ public class AlunoService {
         this.alunoRepository = alunoRepository;
     }
 
-    public Aluno selecionaAluno(Integer id){
+    /*public Aluno selecionaAluno(Integer id){
         LOGGER.info("Selecionando aluno pelo ID {}", id);
-        return this.alunoRepository.findById(id).orElseThrow(AlunoNaoEncontradoException::new);
-    }
+        Aluno aluno = this.alunoRepository.findById(id).orElseThrow(AlunoNaoEncontradoException::new);
+        return aluno;
+    }*/
 
     public List<Aluno> listarTodos(){
         return this.alunoRepository.findAll();
     }
 
-    public void salvarAluno(Aluno aluno){
+    public Aluno salvarAluno(Aluno aluno){
         LOGGER.info("Início do método salvar - Aluno");
         if(!this.alunoRepository.existsByMatricula(aluno.getMatricula())) {
             this.alunoRepository.save(aluno);
+
         }else{
             throw new AlunoJaExisteException();
         }
-        LOGGER.info("Aluno salvo com sucesso");
+       LOGGER.info("Aluno salvo com sucesso");
+        return aluno;
     }
 
     public void alterarAluno(Integer id, Aluno alunoRequest){
         LOGGER.info("Início do método alterar - Aluno");
-        Aluno aluno = this.selecionaAluno(id);
+        Aluno aluno = this.selecionarAlunoById(id);
         aluno.setNome(alunoRequest.getNome());
         this.alunoRepository.save(aluno);
         LOGGER.info("Aluno alterado com sucesso");
@@ -49,14 +52,14 @@ public class AlunoService {
 
     public Aluno deletarAluno(Integer id){
         LOGGER.info("Início do método deletar - Aluno");
-        Aluno aluno = selecionaAluno(id);
+        Aluno aluno = selecionarAlunoById(id);
         this.alunoRepository.delete(aluno);
         LOGGER.info("Aluno deletado com sucesso");
         return aluno;
     }
 
-    public Aluno selecionarAlunoById(Integer id) {
+   public Aluno selecionarAlunoById(Integer id) {
         LOGGER.info("Selecionando aluno pelo ID {}", id);
-        return this.alunoRepository.findById(id).orElseThrow(AlunoNaoEncontradoException::new);
+        return this.alunoRepository.findAlunoById(id).orElseThrow(AlunoNaoEncontradoException::new);
     }
 }

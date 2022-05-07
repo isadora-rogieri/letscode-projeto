@@ -7,10 +7,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface DisciplinaRepository extends JpaRepository<Disciplina, Integer> {
-    Disciplina findDisciplinaById(Integer id);
+    Optional<Disciplina> findDisciplinaById(Integer id);
 
     public boolean existsByNome(String nome);
     public boolean existsByProfessorId(Integer id);
