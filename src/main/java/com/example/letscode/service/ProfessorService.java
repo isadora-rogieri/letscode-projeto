@@ -29,7 +29,7 @@ public class ProfessorService {
         return this.professorRepository.findAll();
     }
 
-    public void salvarProfessor(Professor professor){
+    public Professor salvarProfessor(Professor professor){
         LOGGER.info("Início do método salvar - Professor");
         if(!this.professorRepository.existsByNome(professor.getNome())){
             this.professorRepository.save(professor);
@@ -37,6 +37,7 @@ public class ProfessorService {
             throw new ProfessorJaExisteException();
         }
         LOGGER.info("Professor salvo com sucesso");
+        return professor;
     }
 
     public Professor alterarProfessor(Integer id, Professor professorRequest){
