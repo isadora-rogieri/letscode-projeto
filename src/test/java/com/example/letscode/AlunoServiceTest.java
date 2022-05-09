@@ -1,7 +1,6 @@
 package com.example.letscode;
 
 import com.example.letscode.model.Aluno;
-import com.example.letscode.model.Professor;
 import com.example.letscode.repository.AlunoRepository;
 import com.example.letscode.service.AlunoService;
 import org.junit.jupiter.api.Assertions;
@@ -11,7 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.util.Assert;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

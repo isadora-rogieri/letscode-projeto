@@ -1,6 +1,5 @@
 package com.example.letscode;
 
-import com.example.letscode.model.Aluno;
 import com.example.letscode.model.Professor;
 import com.example.letscode.repository.ProfessorRepository;
 import com.example.letscode.service.ProfessorService;
@@ -12,10 +11,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 public class ProfessorServiceTest {
@@ -55,9 +52,7 @@ public class ProfessorServiceTest {
 //
 //        Assertions.assertNotNull(professor1);
 //        Assertions.assertNotNull(professor1.getId());
-//        Assertions.assertEquals(1, professor.getId());
-
-    }
+//        Assertions.assertEquals(1, professor.getId());}
     @Test
     void listaProfessorTeste() {
 
