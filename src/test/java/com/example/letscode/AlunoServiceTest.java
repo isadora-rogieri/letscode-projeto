@@ -1,6 +1,7 @@
 package com.example.letscode;
 
 import com.example.letscode.model.Aluno;
+import com.example.letscode.model.Professor;
 import com.example.letscode.repository.AlunoRepository;
 import com.example.letscode.service.AlunoService;
 import org.junit.jupiter.api.Assertions;
@@ -13,6 +14,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.util.Assert;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
@@ -63,5 +66,23 @@ public class AlunoServiceTest {
         Assertions.assertNotNull(aluno1.getId());
         Assertions.assertEquals(8, aluno.getId());
 
+    }
+
+    @Test
+    void listaAlunosTeste() {
+
+        List<Aluno> alunoList = new ArrayList<>();
+        alunoList.add(new Aluno("Alan", "MTLA125478", LocalDate.now()));
+        alunoList.add(new Aluno("Mateus", "MTLA125471", LocalDate.now()));
+        alunoList.add(new Aluno("João", "MTLA125479", LocalDate.now()));
+
+        Mockito.when(alunoRepository.findAll())
+                .thenReturn(alunoList);
+
+        List<Aluno> alunos = alunoService.listarTodos();
+
+        Assertions.assertNotNull(alunos);
+        Assertions.assertFalse(alunos.isEmpty());
+        Assertions.assertEquals(3, alunoList.size());
     }
 }

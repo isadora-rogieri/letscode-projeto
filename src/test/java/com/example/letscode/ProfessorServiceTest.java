@@ -13,6 +13,9 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 public class ProfessorServiceTest {
@@ -39,5 +42,37 @@ public class ProfessorServiceTest {
         Assertions.assertEquals(professorSalvar.getId(),professorRetorno.getId());
         Assertions.assertEquals(professorSalvar.getNome(), professorRetorno.getNome());
 
+    }
+//    @Test
+//    void selecionaUmProfessor(){
+//        Professor professor = new Professor();
+//        professor.setId(1);
+//        professor.setNome("Jessé");
+//
+//        Mockito.when(professorRepository.findProfessorById(1)).thenReturn(professor);
+//
+//        Professor professor1 = professorService.selecionarProfessor(1);
+//
+//        Assertions.assertNotNull(professor1);
+//        Assertions.assertNotNull(professor1.getId());
+//        Assertions.assertEquals(1, professor.getId());
+
+    }
+    @Test
+    void listaProfessorTeste() {
+
+        List<Professor> professorList = new ArrayList<>();
+        professorList.add(new Professor("Alan"));
+        professorList.add(new Professor("José"));
+        professorList.add(new Professor("Lucas"));
+
+        Mockito.when(professorRepository.findAll())
+                .thenReturn(professorList);
+
+        List<Professor> professors = professorService.listarTodos();
+
+        Assertions.assertNotNull(professors);
+        Assertions.assertFalse(professors.isEmpty());
+        Assertions.assertEquals(3, professorList.size());
     }
 }
