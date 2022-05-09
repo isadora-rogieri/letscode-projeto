@@ -50,11 +50,8 @@ public class AlunoServiceTest {
     }
     @Test
     void selecionaUmAluno(){
-        Aluno aluno = new Aluno();
+        Aluno aluno = new Aluno("Isadora", "20220415", LocalDate.of(1995,9,15));
         aluno.setId(8);
-        aluno.setNome("Isadora");
-        aluno.setMatricula("20220415");
-        aluno.setDataNascimento(LocalDate.of(1995,9,15));
 
         Mockito.when(alunoRepository.findAlunoById(8)).thenReturn(Optional.of(aluno));
 
@@ -64,8 +61,9 @@ public class AlunoServiceTest {
         Assertions.assertNotNull(aluno1.getId());
         Assertions.assertEquals(8, aluno.getId());
 
-    }
+        System.out.println("Id: " + aluno.getId() + " | Nome: " + aluno.getNome() + " | Matricula: " + aluno.getMatricula() + " | Data de Nascimento: " + aluno.getDataNascimento());
 
+    }
     @Test
     void listaAlunosTeste() {
 
@@ -82,5 +80,9 @@ public class AlunoServiceTest {
         Assertions.assertNotNull(alunos);
         Assertions.assertFalse(alunos.isEmpty());
         Assertions.assertEquals(3, alunoList.size());
+        for ( Aluno aluno : alunos){
+            System.out.println("Id: " + aluno.getId() + " | Nome: " + aluno.getNome() + " | Matricula: " + aluno.getMatricula() + " | Data de Nascimento: " + aluno.getDataNascimento());
+
+        }
     }
 }

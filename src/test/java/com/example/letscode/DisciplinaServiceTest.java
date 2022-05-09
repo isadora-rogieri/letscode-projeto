@@ -28,10 +28,8 @@ public class DisciplinaServiceTest {
 
    @Test
     void selecionaDisciplina(){
-        Disciplina disciplina = new Disciplina();
+        Disciplina disciplina = new Disciplina("Programação Web", (new Professor("Haron")));
         disciplina.setId(2);
-        disciplina.setNome("Programação Web");
-        disciplina.setProfessor(new Professor("Haron"));
         Mockito.when(disciplinaRepository.findDisciplinaById(2)).thenReturn(Optional.of(disciplina));
 
         Disciplina d = disciplinaService.selecionarDisciplina(2);
@@ -40,14 +38,10 @@ public class DisciplinaServiceTest {
     }
   @Test
   void listarTodas(){
-      Disciplina disciplina1 = new Disciplina();
+      Disciplina disciplina1 = new Disciplina("Programação Web", (new Professor("Haron")));
       disciplina1.setId(2);
-      disciplina1.setNome("Programação Web");
-      disciplina1.setProfessor(new Professor("Haron"));
-      Disciplina disciplina2 = new Disciplina();
+      Disciplina disciplina2 = new Disciplina("Programação Web II", (new Professor("Haron")));
       disciplina2.setId(1);
-      disciplina2.setNome("Programação Web II");
-      disciplina2.setProfessor(new Professor("Haron"));
       List<Disciplina> disciplinaList = new ArrayList<>();
       disciplinaList.add(disciplina1);
       disciplinaList.add(disciplina2);
@@ -61,6 +55,10 @@ public class DisciplinaServiceTest {
       Assertions.assertFalse(disciplinas.isEmpty());
       Assertions.assertEquals(2, disciplinas.size());
 
+      for (Disciplina disciplina : disciplinas){
+          System.out.println("Id: " + disciplina.getId() + " | Disciplina: " + disciplina.getNome() + " | Professor: " + disciplina.getProfessor().getNome());
+
+      }
   }
 
 

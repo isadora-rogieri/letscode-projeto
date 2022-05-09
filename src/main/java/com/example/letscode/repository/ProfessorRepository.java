@@ -7,10 +7,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ProfessorRepository extends JpaRepository<Professor, Integer> {
-    Professor findProfessorById(Integer id);
+    Optional<Professor> findProfessorById(Integer id);
 
     public boolean existsByNome(String nome);
     List<Professor> findByNomeEquals(String nome);

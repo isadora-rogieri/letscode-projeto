@@ -13,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 public class ProfessorServiceTest {
@@ -25,12 +26,10 @@ public class ProfessorServiceTest {
 
     @Test
     void salvarProfessor() {
-        Professor professorSalvar = new Professor();
-        professorSalvar.setNome("Luiza");
-
-        Professor professorRetorno = new Professor();
+        Professor professorSalvar = new Professor("Luiza");
+        professorSalvar.setId(1);
+        Professor professorRetorno = new Professor("Luiza");
         professorRetorno.setId(1);
-        professorRetorno.setNome("Luiza");
 
         Mockito.when(professorRepository.save(professorSalvar)).thenReturn(professorRetorno);
         professorRetorno = professorService.salvarProfessor(professorSalvar);
@@ -38,21 +37,23 @@ public class ProfessorServiceTest {
         Assertions.assertNotNull(professorRetorno);
         Assertions.assertEquals(professorSalvar.getId(),professorRetorno.getId());
         Assertions.assertEquals(professorSalvar.getNome(), professorRetorno.getNome());
-
+        System.out.println("Id: " + professorRetorno.getId() + " Nome: " + professorRetorno.getNome());
     }
-//    @Test
-//    void selecionaUmProfessor(){
-//        Professor professor = new Professor();
-//        professor.setId(1);
-//        professor.setNome("Jessé");
-//
-//        Mockito.when(professorRepository.findProfessorById(1)).thenReturn(professor);
-//
-//        Professor professor1 = professorService.selecionarProfessor(1);
-//
-//        Assertions.assertNotNull(professor1);
-//        Assertions.assertNotNull(professor1.getId());
-//        Assertions.assertEquals(1, professor.getId());}
+    @Test
+    void selecionaUmProfessor(){
+        Professor professor = new Professor("Jessé");
+        professor.setId(1);
+
+        Mockito.when(professorRepository.findProfessorById(1)).thenReturn(Optional.of(professor));
+
+        Professor professor1 = professorService.selecionarProfessor(1);
+
+        Assertions.assertNotNull(professor1);
+        Assertions.assertNotNull(professor1.getId());
+        Assertions.assertEquals(1, professor.getId());
+
+        System.out.println("Id: " + professor.getId() + " Nome: " + professor.getNome());
+    }
     @Test
     void listaProfessorTeste() {
 
