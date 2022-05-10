@@ -1,3 +1,38 @@
+----
+# Projeto final  5 - Módulo Testes Automatizados
+____
+Este é o repositório do nosso projeto final do Módulo de Testes Automatizados
+do curso da Lets's Code. A proposta é dar continuação ao projeto anterior , desenvolvendo os testes para garantir a qualidade
+do sistema previamente criado.
+
+### Integrantes do grupo - Squad VERDE 🍀 :
+
+    🌲 Camily Aleixo Randi 
+    🍏 Everton Sebastião do Nascimento 
+    📗 Gabriela Trindade Ferreira 
+    💚 Isadora Oliveira Rogieri 
+
+### Planejamento do desenvolvimento:
+
+     ⬛ Criar os casos de teste
+        Baseado nesses casos, desenvolver:
+         ⬜ Testes unitarios
+         ⬜ Testes de integração
+         ⬜ novas funcionalidades usando a metodologia TDD
+          
+### Objetivos:
+
+    🔴 70% Cobertura de codigo
+    🔴 Implementacao da metodologia TDD
+    🔴 Ferramentas: JUNIT, MOCKITO e SONARQUBE
+    
+    
+    
+<br>
+<br>
+
+Dê uma olhadinha no processo desse projeto antes de chegar aqui 😉 :
+
 -----------
 # Projeto final 4 - Módulo Programação Web II
 -----------
