@@ -22,14 +22,14 @@ public class ProfessorService {
 
     public Professor selecionarProfessor(Integer id){
         LOGGER.info("Selecionando Professor pelo ID ", id);
-        return this.professorRepository.findById(id).orElseThrow(ProfessorNaoEncontradoException::new);
+        return this.professorRepository.findProfessorById(id).orElseThrow(ProfessorNaoEncontradoException::new);
     }
 
     public List<Professor> listarTodos(){
         return this.professorRepository.findAll();
     }
 
-    public void salvarProfessor(Professor professor){
+    public Professor salvarProfessor(Professor professor){
         LOGGER.info("Início do método salvar - Professor");
         if(!this.professorRepository.existsByNome(professor.getNome())){
             this.professorRepository.save(professor);
@@ -37,6 +37,7 @@ public class ProfessorService {
             throw new ProfessorJaExisteException();
         }
         LOGGER.info("Professor salvo com sucesso");
+        return professor;
     }
 
     public Professor alterarProfessor(Integer id, Professor professorRequest){

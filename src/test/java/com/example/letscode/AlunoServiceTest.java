@@ -10,9 +10,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.util.Assert;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
@@ -49,11 +50,8 @@ public class AlunoServiceTest {
     }
     @Test
     void selecionaUmAluno(){
-        Aluno aluno = new Aluno();
+        Aluno aluno = new Aluno("Isadora", "20220415", LocalDate.of(1995,9,15));
         aluno.setId(8);
-        aluno.setNome("Isadora");
-        aluno.setMatricula("20220415");
-        aluno.setDataNascimento(LocalDate.of(1995,9,15));
 
         Mockito.when(alunoRepository.findAlunoById(8)).thenReturn(Optional.of(aluno));
 
@@ -63,5 +61,28 @@ public class AlunoServiceTest {
         Assertions.assertNotNull(aluno1.getId());
         Assertions.assertEquals(8, aluno.getId());
 
+        System.out.println("Id: " + aluno.getId() + " | Nome: " + aluno.getNome() + " | Matricula: " + aluno.getMatricula() + " | Data de Nascimento: " + aluno.getDataNascimento());
+
+    }
+    @Test
+    void listaAlunosTeste() {
+
+        List<Aluno> alunoList = new ArrayList<>();
+        alunoList.add(new Aluno("Alan", "MTLA125478", LocalDate.now()));
+        alunoList.add(new Aluno("Mateus", "MTLA125471", LocalDate.now()));
+        alunoList.add(new Aluno("João", "MTLA125479", LocalDate.now()));
+
+        Mockito.when(alunoRepository.findAll())
+                .thenReturn(alunoList);
+
+        List<Aluno> alunos = alunoService.listarTodos();
+
+        Assertions.assertNotNull(alunos);
+        Assertions.assertFalse(alunos.isEmpty());
+        Assertions.assertEquals(3, alunoList.size());
+        for ( Aluno aluno : alunos){
+            System.out.println("Id: " + aluno.getId() + " | Nome: " + aluno.getNome() + " | Matricula: " + aluno.getMatricula() + " | Data de Nascimento: " + aluno.getDataNascimento());
+
+        }
     }
 }
