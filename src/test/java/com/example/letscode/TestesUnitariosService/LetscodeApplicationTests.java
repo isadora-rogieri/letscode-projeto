@@ -1,4 +1,4 @@
-package com.example.letscode;
+package com.example.letscode.TestesUnitariosService;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

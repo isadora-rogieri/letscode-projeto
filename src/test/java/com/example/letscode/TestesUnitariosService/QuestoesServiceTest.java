@@ -1,4 +1,4 @@
-package com.example.letscode;
+package com.example.letscode.TestesUnitariosService;
 
 import com.example.letscode.model.Disciplina;
 import com.example.letscode.model.Professor;
@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
-public class QuestoesServiceTeste {
+public class QuestoesServiceTest {
 
     @InjectMocks
     private QuestaoService questaoService;
