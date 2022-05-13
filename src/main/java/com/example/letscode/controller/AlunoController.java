@@ -1,9 +1,11 @@
 package com.example.letscode.controller;
 
+import com.example.letscode.dto.AlunoDto;
 import com.example.letscode.model.Aluno;
 import com.example.letscode.service.AlunoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
@@ -18,13 +20,24 @@ public class AlunoController {
         this.alunoService = alunoService;
     }
 
-    @PostMapping
+    @PostMapping("/salva")
     public ResponseEntity salvar(@Valid @RequestBody Aluno aluno) {
         this.alunoService.salvarAluno(aluno);
         ResponseEntity response = new ResponseEntity("Aluno salvo com sucesso", HttpStatus.CREATED);
         return response;
     }
-
+//    @PostMapping("/salva")
+//    public ResponseEntity salvar(@ModelAttribute @Valid @RequestBody AlunoDto alunoDto, BindingResult errors) {
+//        Aluno aluno = new Aluno();
+//        aluno.setNome(alunoDto.getNome());
+//        aluno.setDataNascimento(alunoDto.getDataNascimento());
+//        aluno.setMatricula(alunoDto.getMatricula());
+//        aluno.setId(alunoDto.getId());
+//
+//        this.alunoService.salvarAluno(aluno);
+//        ResponseEntity response = new ResponseEntity("Aluno salvo com sucesso", HttpStatus.CREATED);
+//        return response;
+//    }
     @GetMapping
     public List<Aluno> listarAlunos() {
         return this.alunoService.listarTodos();

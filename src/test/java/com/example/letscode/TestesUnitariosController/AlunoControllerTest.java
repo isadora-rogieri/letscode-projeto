@@ -1,6 +1,7 @@
 package com.example.letscode.TestesUnitariosController;
 
 import com.example.letscode.controller.AlunoController;
+import com.example.letscode.dto.AlunoDto;
 import com.example.letscode.model.Aluno;
 import com.example.letscode.service.AlunoService;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -33,7 +35,7 @@ public class AlunoControllerTest{
 
     @Test
     @WithMockUser
-    void listarTdososAlunos() throws Exception{
+    void listarTdososAlunos() throws Exception {
 
         List<Aluno> alunoList = new ArrayList<>();
         alunoList.add(new Aluno("Alan", "MTLA125478", LocalDate.now()));
@@ -44,6 +46,28 @@ public class AlunoControllerTest{
         this.mockMvc.perform(
                         MockMvcRequestBuilders.get("/aluno")
                 )
-                .andDo(MockMvcResultHandlers.print());
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+    }
+    @Test
+    @WithMockUser
+    void salvarAlunoTestController() throws Exception{
+
+        AlunoDto alunoDto = new AlunoDto(1, "Nome", "MTLA120395", LocalDate.now());
+
+        Aluno aluno = new Aluno();
+        aluno.setId(alunoDto.getId());
+        aluno.setNome(alunoDto.getNome());
+        aluno.setDataNascimento(alunoDto.getDataNascimento());
+        aluno.setMatricula(alunoDto.getMatricula());
+
+        Mockito.when(alunoService.salvarAluno(aluno))
+                .thenReturn(aluno);
+
+        this.mockMvc.perform(
+                MockMvcRequestBuilders.post("/aluno/salva")
+                        .flashAttr("aluno", aluno)
+        ).andDo(MockMvcResultHandlers.print());
     }
 }
