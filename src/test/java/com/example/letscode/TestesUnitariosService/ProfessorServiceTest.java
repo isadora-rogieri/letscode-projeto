@@ -3,8 +3,7 @@ package com.example.letscode.TestesUnitariosService;
 import com.example.letscode.model.Professor;
 import com.example.letscode.repository.ProfessorRepository;
 import com.example.letscode.service.ProfessorService;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -24,12 +23,36 @@ public class ProfessorServiceTest {
     @Mock
     private ProfessorRepository professorRepository;
 
+    private Professor professorSalvar;
+    private Professor professorRetorno;
+    private Professor professorAddList;
+    private List<Professor> professorList;
+
+    @BeforeAll
+    public static void atesDeTodos(){ // o método deve ser sempre estático
+        System.out.println("Iniciando testes ProfessorServiceTest");
+    }
+    @AfterAll
+    public static void aposDeTodos(){ // o método deve ser sempre estático
+        System.out.println("Finalizando testes ProfessorServiceTest");
+    }
+    @BeforeEach
+
+    public void inicializar(){
+        professorSalvar = new Professor("Jessé");
+        professorSalvar.setId(1);
+        professorRetorno = new Professor("Jessé");
+        professorRetorno.setId(1);
+        professorAddList = new Professor("Jessé");
+        professorAddList.setId(1);
+
+        professorList = new ArrayList<>();
+        professorList.add(professorSalvar);
+        professorList.add(professorAddList);
+    }
+
     @Test
     void salvarProfessor() {
-        Professor professorSalvar = new Professor("Luiza");
-        professorSalvar.setId(1);
-        Professor professorRetorno = new Professor("Luiza");
-        professorRetorno.setId(1);
 
         Mockito.when(professorRepository.save(professorSalvar)).thenReturn(professorRetorno);
         professorRetorno = professorService.salvarProfessor(professorSalvar);
@@ -37,30 +60,22 @@ public class ProfessorServiceTest {
         Assertions.assertNotNull(professorRetorno);
         Assertions.assertEquals(professorSalvar.getId(),professorRetorno.getId());
         Assertions.assertEquals(professorSalvar.getNome(), professorRetorno.getNome());
-        System.out.println("Id: " + professorRetorno.getId() + " Nome: " + professorRetorno.getNome());
+        System.out.println("Salvando professor Id: " + professorRetorno.getId() + " Nome: " + professorRetorno.getNome());
     }
     @Test
     void selecionaUmProfessor(){
-        Professor professor = new Professor("Jessé");
-        professor.setId(1);
 
-        Mockito.when(professorRepository.findProfessorById(1)).thenReturn(Optional.of(professor));
-
+        Mockito.when(professorRepository.findProfessorById(1)).thenReturn(Optional.of(professorSalvar));
         Professor professor1 = professorService.selecionarProfessor(1);
 
         Assertions.assertNotNull(professor1);
         Assertions.assertNotNull(professor1.getId());
-        Assertions.assertEquals(1, professor.getId());
+        Assertions.assertEquals(1, professorSalvar.getId());
 
-        System.out.println("Id: " + professor.getId() + " Nome: " + professor.getNome());
+        System.out.println("Selecionando professor Id: " + professorSalvar.getId() + " Nome: " + professorSalvar.getNome());
     }
     @Test
     void listaProfessorTeste() {
-
-        List<Professor> professorList = new ArrayList<>();
-        professorList.add(new Professor("Alan"));
-        professorList.add(new Professor("José"));
-        professorList.add(new Professor("Lucas"));
 
         Mockito.when(professorRepository.findAll())
                 .thenReturn(professorList);
@@ -69,6 +84,8 @@ public class ProfessorServiceTest {
 
         Assertions.assertNotNull(professors);
         Assertions.assertFalse(professors.isEmpty());
-        Assertions.assertEquals(3, professorList.size());
+        Assertions.assertEquals(2, professorList.size());
+        System.out.println("Listando professor Id: " + professorSalvar.getId() + " Nome: " + professorSalvar.getNome());
+
     }
 }

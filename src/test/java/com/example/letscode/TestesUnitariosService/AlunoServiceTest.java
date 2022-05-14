@@ -3,8 +3,7 @@ package com.example.letscode.TestesUnitariosService;
 import com.example.letscode.model.Aluno;
 import com.example.letscode.repository.AlunoRepository;
 import com.example.letscode.service.AlunoService;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -25,18 +24,41 @@ public class AlunoServiceTest {
     @Mock
     private AlunoRepository alunoRepository;
 
+    private Aluno alunoSalvar;
+    private Aluno alunoRetorno;
+    private Aluno alunoAddList;
+
+    private List<Aluno> alunoList;
+
+    @BeforeAll
+    public static void atesDeTodos(){ // o método deve ser sempre estático
+        System.out.println("Iniciando testes AlunoServiceTest");
+    }
+    @AfterAll
+    public static void aposDeTodos(){ // o método deve ser sempre estático
+        System.out.println("Finalizando testes AlunoServiceTest");
+    }
+
+    @BeforeEach
+    public void inicializar(){
+
+        alunoSalvar = new Aluno("Isadora", "20220415", LocalDate.of(1995,9,15));
+        alunoSalvar.setId(1);
+
+        alunoRetorno = new Aluno("Isadora", "20220415", LocalDate.of(1995,9,15));
+        alunoRetorno.setId(1);
+
+        alunoAddList = new Aluno("Flora", "27220415", LocalDate.of(1999,9,15));
+        alunoAddList.setId(2);
+
+        alunoList = new ArrayList<>();
+        alunoList.add(alunoSalvar);
+        alunoList.add(alunoAddList);
+
+    }
+
     @Test
     void salvarAluno() {
-        Aluno alunoSalvar = new Aluno();
-        alunoSalvar.setNome("Isadora");
-        alunoSalvar.setMatricula("20220415");
-        alunoSalvar.setDataNascimento(LocalDate.of(1995,9,15));
-
-        Aluno alunoRetorno = new Aluno();
-        alunoRetorno.setId(8);
-        alunoRetorno.setNome("Isadora");
-        alunoRetorno.setMatricula("20220415");
-        alunoRetorno.setDataNascimento(LocalDate.of(1995,9,15));
 
         Mockito.when(alunoRepository.save(alunoSalvar)).thenReturn(alunoRetorno);
         alunoRetorno = alunoService.salvarAluno(alunoSalvar);
@@ -50,38 +72,29 @@ public class AlunoServiceTest {
     }
     @Test
     void selecionaUmAluno(){
-        Aluno aluno = new Aluno("Isadora", "20220415", LocalDate.of(1995,9,15));
-        aluno.setId(8);
 
-        Mockito.when(alunoRepository.findAlunoById(8)).thenReturn(Optional.of(aluno));
+        Mockito.when(alunoRepository.findAlunoById(1)).thenReturn(Optional.of(alunoSalvar));
+        Aluno alunoSelecionado = alunoService.selecionarAlunoById(1);
 
-        Aluno aluno1 = alunoService.selecionarAlunoById(8);
+        Assertions.assertNotNull(alunoSelecionado);
+        Assertions.assertNotNull(alunoSelecionado.getId());
+        Assertions.assertEquals(1, alunoSelecionado.getId());
 
-        Assertions.assertNotNull(aluno1);
-        Assertions.assertNotNull(aluno1.getId());
-        Assertions.assertEquals(8, aluno.getId());
-
-        System.out.println("Id: " + aluno.getId() + " | Nome: " + aluno.getNome() + " | Matricula: " + aluno.getMatricula() + " | Data de Nascimento: " + aluno.getDataNascimento());
+        System.out.println("Selecionando aluno Id: " + alunoSelecionado.getId() + " | Nome: " + alunoSelecionado.getNome() + " | Matricula: " + alunoSelecionado.getMatricula() + " | Data de Nascimento: " + alunoSelecionado.getDataNascimento());
 
     }
     @Test
     void listaAlunosTeste() {
 
-        List<Aluno> alunoList = new ArrayList<>();
-        alunoList.add(new Aluno("Alan", "MTLA125478", LocalDate.now()));
-        alunoList.add(new Aluno("Mateus", "MTLA125471", LocalDate.now()));
-        alunoList.add(new Aluno("João", "MTLA125479", LocalDate.now()));
-
-        Mockito.when(alunoRepository.findAll())
-                .thenReturn(alunoList);
+        Mockito.when(alunoRepository.findAll()).thenReturn(alunoList);
 
         List<Aluno> alunos = alunoService.listarTodos();
 
         Assertions.assertNotNull(alunos);
         Assertions.assertFalse(alunos.isEmpty());
-        Assertions.assertEquals(3, alunoList.size());
+        Assertions.assertEquals(2, alunoList.size());
         for ( Aluno aluno : alunos){
-            System.out.println("Id: " + aluno.getId() + " | Nome: " + aluno.getNome() + " | Matricula: " + aluno.getMatricula() + " | Data de Nascimento: " + aluno.getDataNascimento());
+            System.out.println("Listando aluno Id: " + aluno.getId() + " | Nome: " + aluno.getNome() + " | Matricula: " + aluno.getMatricula() + " | Data de Nascimento: " + aluno.getDataNascimento());
 
         }
     }

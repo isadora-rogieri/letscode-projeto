@@ -5,8 +5,7 @@ import com.example.letscode.model.Disciplina;
 import com.example.letscode.model.Professor;
 import com.example.letscode.repository.DisciplinaRepository;
 import com.example.letscode.service.DisciplinaService;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -26,40 +25,55 @@ public class DisciplinaServiceTest {
     @Mock
     private DisciplinaRepository disciplinaRepository;
 
-   @Test
-    void selecionaDisciplina(){
-        Disciplina disciplina = new Disciplina("Programação Web", (new Professor("Haron")));
+    private Disciplina disciplina;
+    private Disciplina disciplina2;
+    private List<Disciplina> disciplinaList;
+
+    @BeforeAll
+    public static void atesDeTodos(){ // o método deve ser sempre estático
+        System.out.println("Iniciando testes DisciplinaServiceTest");
+    }
+    @AfterAll
+    public static void aposDeTodos(){ // o método deve ser sempre estático
+        System.out.println("Finalizando testes DisciplinaServiceTest");
+    }
+
+    @BeforeEach
+    public void inicializar(){
+        disciplina = new Disciplina("Programação Web", (new Professor("Haron")));
         disciplina.setId(2);
+        disciplina2 = new Disciplina("Programação Web II", (new Professor("Haron")));
+        disciplina2.setId(1);
+        disciplinaList = new ArrayList<>();
+        disciplinaList.add(disciplina);
+        disciplinaList.add(disciplina2);
+
+    }
+
+    @Test()
+    void selecionaDisciplina(){
+
         Mockito.when(disciplinaRepository.findDisciplinaById(2)).thenReturn(Optional.of(disciplina));
 
         Disciplina d = disciplinaService.selecionarDisciplina(2);
-       Assertions.assertNotNull(d);
+        Assertions.assertNotNull(d);
         Assertions.assertEquals(disciplina.getId(), d.getId());
     }
-  @Test
-  void listarTodas(){
-      Disciplina disciplina1 = new Disciplina("Programação Web", (new Professor("Haron")));
-      disciplina1.setId(2);
-      Disciplina disciplina2 = new Disciplina("Programação Web II", (new Professor("Haron")));
-      disciplina2.setId(1);
-      List<Disciplina> disciplinaList = new ArrayList<>();
-      disciplinaList.add(disciplina1);
-      disciplinaList.add(disciplina2);
+    @Test
+    void listarTodas(){
 
-      Mockito.when(disciplinaRepository.findAll())
+        Mockito.when(disciplinaRepository.findAll())
               .thenReturn(disciplinaList);
 
-      List<Disciplina> disciplinas = disciplinaService.listarTodos();
+        List<Disciplina> disciplinas = disciplinaService.listarTodos();
 
-      Assertions.assertNotNull(disciplinas);
-      Assertions.assertFalse(disciplinas.isEmpty());
-      Assertions.assertEquals(2, disciplinas.size());
+        Assertions.assertNotNull(disciplinas);
+        Assertions.assertFalse(disciplinas.isEmpty());
+        Assertions.assertEquals(2, disciplinas.size());
 
-      for (Disciplina disciplina : disciplinas){
+        for (Disciplina disciplina : disciplinas){
           System.out.println("Id: " + disciplina.getId() + " | Disciplina: " + disciplina.getNome() + " | Professor: " + disciplina.getProfessor().getNome());
 
-      }
+        }
   }
-
-
 }
