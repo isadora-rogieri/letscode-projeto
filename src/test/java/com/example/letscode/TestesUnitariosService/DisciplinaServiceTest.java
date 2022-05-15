@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 @ExtendWith(MockitoExtension.class)
 public class DisciplinaServiceTest {
 
@@ -54,26 +56,29 @@ public class DisciplinaServiceTest {
     }
 
     @Test
+    @DisplayName("Teste salvar disciplina")
     void salvarDisciplina(){
 
         Mockito.when(disciplinaRepository.save(disciplina)).thenReturn(disciplinaRetorno);
         disciplinaRetorno = disciplinaService.salvarDisciplina(disciplina);
 
-        Assertions.assertNotNull(disciplinaRetorno);
-        Assertions.assertEquals(disciplina.getId(), disciplinaRetorno.getId());
-        Assertions.assertEquals(disciplina.getNome(), disciplinaRetorno.getNome());
-        Assertions.assertEquals(disciplina.getProfessor(), disciplinaRetorno.getProfessor());
+        assertNotNull(disciplinaRetorno);
+        assertEquals(disciplina.getId(), disciplinaRetorno.getId());
+        assertEquals(disciplina.getNome(), disciplinaRetorno.getNome());
+        assertEquals(disciplina.getProfessor(), disciplinaRetorno.getProfessor());
     }
     @Test
+    @DisplayName("Teste selecionar disciplina")
     void selecionaDisciplina(){
 
         Mockito.when(disciplinaRepository.findDisciplinaById(2)).thenReturn(Optional.of(disciplina));
 
         Disciplina d = disciplinaService.selecionarDisciplina(2);
-        Assertions.assertNotNull(d);
-        Assertions.assertEquals(disciplina.getId(), d.getId());
+        assertNotNull(d);
+        assertEquals(disciplina.getId(), d.getId());
     }
     @Test
+    @DisplayName("Teste selecionar todas as disciplinas")
     void listarTodas(){
 
         Mockito.when(disciplinaRepository.findAll())
@@ -81,9 +86,9 @@ public class DisciplinaServiceTest {
 
         List<Disciplina> disciplinas = disciplinaService.listarTodos();
 
-        Assertions.assertNotNull(disciplinas);
-        Assertions.assertFalse(disciplinas.isEmpty());
-        Assertions.assertEquals(2, disciplinas.size());
+        assertNotNull(disciplinas);
+        assertFalse(disciplinas.isEmpty());
+        assertEquals(2, disciplinas.size());
 
         for (Disciplina disciplina : disciplinas){
           System.out.println("Id: " + disciplina.getId() + " | Disciplina: " + disciplina.getNome() + " | Professor: " + disciplina.getProfessor().getNome());

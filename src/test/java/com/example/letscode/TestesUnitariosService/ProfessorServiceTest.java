@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 @ExtendWith(MockitoExtension.class)
 public class ProfessorServiceTest {
 
@@ -52,29 +54,32 @@ public class ProfessorServiceTest {
     }
 
     @Test
+    @DisplayName("Teste salvar professor")
     void salvarProfessor() {
 
         Mockito.when(professorRepository.save(professorSalvar)).thenReturn(professorRetorno);
         professorRetorno = professorService.salvarProfessor(professorSalvar);
 
-        Assertions.assertNotNull(professorRetorno);
-        Assertions.assertEquals(professorSalvar.getId(),professorRetorno.getId());
-        Assertions.assertEquals(professorSalvar.getNome(), professorRetorno.getNome());
+        assertNotNull(professorRetorno);
+        assertEquals(professorSalvar.getId(),professorRetorno.getId());
+        assertEquals(professorSalvar.getNome(), professorRetorno.getNome());
         System.out.println("Salvando professor Id: " + professorRetorno.getId() + " Nome: " + professorRetorno.getNome());
     }
     @Test
+    @DisplayName("Teste selecionar um professor")
     void selecionaUmProfessor(){
 
         Mockito.when(professorRepository.findProfessorById(1)).thenReturn(Optional.of(professorSalvar));
         Professor professor1 = professorService.selecionarProfessor(1);
 
-        Assertions.assertNotNull(professor1);
-        Assertions.assertNotNull(professor1.getId());
-        Assertions.assertEquals(1, professorSalvar.getId());
+        assertNotNull(professor1);
+        assertNotNull(professor1.getId());
+        assertEquals(1, professorSalvar.getId());
 
         System.out.println("Selecionando professor Id: " + professorSalvar.getId() + " Nome: " + professorSalvar.getNome());
     }
     @Test
+    @DisplayName("Teste selecionar professores")
     void listaProfessorTeste() {
 
         Mockito.when(professorRepository.findAll())
@@ -82,9 +87,9 @@ public class ProfessorServiceTest {
 
         List<Professor> professors = professorService.listarTodos();
 
-        Assertions.assertNotNull(professors);
-        Assertions.assertFalse(professors.isEmpty());
-        Assertions.assertEquals(2, professorList.size());
+        assertNotNull(professors);
+        assertFalse(professors.isEmpty());
+        assertEquals(2, professorList.size());
         System.out.println("Listando professor Id: " + professorSalvar.getId() + " Nome: " + professorSalvar.getNome());
 
     }

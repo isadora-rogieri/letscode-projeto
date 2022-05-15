@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 @ExtendWith(MockitoExtension.class)
 public class AlunoServiceTest {
 
@@ -58,41 +60,72 @@ public class AlunoServiceTest {
     }
 
     @Test
+    @DisplayName("Teste salvar aluno")
     void salvarAluno() {
 
         Mockito.when(alunoRepository.save(alunoSalvar)).thenReturn(alunoRetorno);
         alunoRetorno = alunoService.salvarAluno(alunoSalvar);
 
-        Assertions.assertNotNull(alunoRetorno);
-        Assertions.assertEquals(alunoSalvar.getId(),alunoRetorno.getId());
-        Assertions.assertEquals(alunoSalvar.getNome(), alunoRetorno.getNome());
-        Assertions.assertEquals(alunoSalvar.getMatricula(), alunoRetorno.getMatricula());
-        Assertions.assertEquals(alunoSalvar.getDataNascimento(), alunoRetorno.getDataNascimento());
+        assertNotNull(alunoRetorno);
+        assertEquals(alunoSalvar.getId(),alunoRetorno.getId());
+        assertEquals(alunoSalvar.getNome(), alunoRetorno.getNome());
+        assertEquals(alunoSalvar.getMatricula(), alunoRetorno.getMatricula());
+        assertEquals(alunoSalvar.getDataNascimento(), alunoRetorno.getDataNascimento());
 
     }
+
     @Test
+    @DisplayName("Campo nome não pode ser nulo")
+    void SalvarAlunoErroNomeNulo() {
+        try {
+            if (alunoSalvar.getNome() == null) {
+                fail("Falha teste - Nome do aluno não pode ser nulo");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            assertTrue(true);
+        }
+    }
+
+    @Test
+    @DisplayName("Campo matrícula não pode ser nulo")
+    void SalvarAlunoErroMatriculaNula() {
+        try {
+            if (alunoSalvar.getMatricula() == null) {
+                fail("Falha teste - Matrícula não pode ser nula");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            assertTrue(true);
+        }
+    }
+
+    @Test
+    @DisplayName("Teste selecionar um aluno")
     void selecionaUmAluno(){
 
         Mockito.when(alunoRepository.findAlunoById(1)).thenReturn(Optional.of(alunoSalvar));
         Aluno alunoSelecionado = alunoService.selecionarAlunoById(1);
 
-        Assertions.assertNotNull(alunoSelecionado);
-        Assertions.assertNotNull(alunoSelecionado.getId());
-        Assertions.assertEquals(1, alunoSelecionado.getId());
+        assertNotNull(alunoSelecionado);
+        assertNotNull(alunoSelecionado.getId());
+        assertEquals(1, alunoSelecionado.getId());
 
         System.out.println("Selecionando aluno Id: " + alunoSelecionado.getId() + " | Nome: " + alunoSelecionado.getNome() + " | Matricula: " + alunoSelecionado.getMatricula() + " | Data de Nascimento: " + alunoSelecionado.getDataNascimento());
 
     }
+
     @Test
+    @DisplayName("Teste listar alunos")
     void listaAlunosTeste() {
 
         Mockito.when(alunoRepository.findAll()).thenReturn(alunoList);
 
         List<Aluno> alunos = alunoService.listarTodos();
 
-        Assertions.assertNotNull(alunos);
-        Assertions.assertFalse(alunos.isEmpty());
-        Assertions.assertEquals(2, alunoList.size());
+        assertNotNull(alunos);
+        assertFalse(alunos.isEmpty());
+        assertEquals(2, alunoList.size());
         for ( Aluno aluno : alunos){
             System.out.println("Listando aluno Id: " + aluno.getId() + " | Nome: " + aluno.getNome() + " | Matricula: " + aluno.getMatricula() + " | Data de Nascimento: " + aluno.getDataNascimento());
 

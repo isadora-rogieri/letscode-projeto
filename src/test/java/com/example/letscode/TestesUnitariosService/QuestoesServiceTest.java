@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 @ExtendWith(MockitoExtension.class)
 public class QuestoesServiceTest {
 
@@ -55,39 +57,42 @@ public class QuestoesServiceTest {
         questaoList.add(questaoAddList);
     }
     @Test
+    @DisplayName("Teste salvar questão")
     void salvarQuestao(){
 
         Mockito.when(questaoRepository.save(questaoSalvar)).thenReturn(questaoRetorno);
         questaoRetorno = questaoService.salvarQuestao(questaoSalvar);
 
-        Assertions.assertNotNull(questaoRetorno);
-        Assertions.assertEquals(questaoSalvar.getId(),questaoRetorno.getId());
-        Assertions.assertEquals(questaoSalvar.getEnunciado(), questaoRetorno.getEnunciado());
-        Assertions.assertEquals(questaoSalvar.getDisciplina(), questaoRetorno.getDisciplina());
+        assertNotNull(questaoRetorno);
+        assertEquals(questaoSalvar.getId(),questaoRetorno.getId());
+        assertEquals(questaoSalvar.getEnunciado(), questaoRetorno.getEnunciado());
+        assertEquals(questaoSalvar.getDisciplina(), questaoRetorno.getDisciplina());
         System.out.println(" Salvando questão Id: " + questaoRetorno.getId() + " | Questão enunciado: " + questaoRetorno.getEnunciado() + " | Disciplina: " + questaoRetorno.getDisciplina().getNome() + " | Professor: " + questaoRetorno.getDisciplina().getProfessor().getNome());
     }
     @Test
+    @DisplayName("Teste selecionar uma questão")
     void selecionaUmaQuestao(){
 
         Mockito.when(questaoRepository.findById(1)).thenReturn(Optional.of(questaoSalvar));
 
         Questao questao1 = questaoService.buscarQuestaoporId(1);
 
-        Assertions.assertNotNull(questao1);
-        Assertions.assertNotNull(questao1.getId());
-        Assertions.assertEquals(1, questaoSalvar.getId());
+        assertNotNull(questao1);
+        assertNotNull(questao1.getId());
+        assertEquals(1, questaoSalvar.getId());
         System.out.println("Selecionando questão Id: " + questao1.getId() + " | Questão enunciado: " + questao1.getEnunciado() + " | Disciplina: " + questao1.getDisciplina().getNome() + " | Professor: " + questao1.getDisciplina().getProfessor().getNome());
     }
     @Test
+    @DisplayName("Teste listar questões")
     void listaQuestoesTeste() {
 
         Mockito.when(questaoRepository.findAll()).thenReturn(questaoList);
 
         List<Questao> questoes = questaoService.listarQuestoes();
 
-        Assertions.assertNotNull(questoes);
-        Assertions.assertFalse(questoes.isEmpty());
-        Assertions.assertEquals(2, questaoList.size());
+        assertNotNull(questoes);
+        assertFalse(questoes.isEmpty());
+        assertEquals(2, questaoList.size());
         for (Questao questoe : questoes){
             System.out.println("Listando questão Id: " + questoe.getId() + " | Questão enunciado: " + questoe.getEnunciado() + " | Disciplina: " + questoe.getDisciplina().getNome() + " | Professor: " + questoe.getDisciplina().getProfessor().getNome());
         }
