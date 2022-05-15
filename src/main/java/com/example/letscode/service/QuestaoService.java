@@ -16,6 +16,8 @@ public class QuestaoService {
     private static final Logger LOGGER = LoggerFactory.getLogger(QuestaoService.class);
     private final QuestaoRepository questaoRepository;
 
+    private static final String QUESTAO = "Questão";
+
     public QuestaoService(QuestaoRepository questaoRepository) {
         this.questaoRepository = questaoRepository;
     }
@@ -25,7 +27,7 @@ public class QuestaoService {
     }
 
     public Questao buscarQuestaoporId(Integer id) {
-        LOGGER.info("Selecionando Questão pelo ID ", id);
+        LOGGER.info("Selecionando Questão pelo ID {}", id);
         return this.questaoRepository.findById(id).orElseThrow(QuestaoNaoEncontradaException::new);
     }
 
@@ -33,8 +35,8 @@ public class QuestaoService {
         LOGGER.info("Início do método salvar - Questão");
         if(!(this.questaoRepository.existsByEnunciado(questao.getEnunciado())
             || this.questaoRepository.existsById(questao.getId()))){
-            Questao questaoSalva = this.questaoRepository.save(questao);
-            LOGGER.info("Questao " + questaoSalva.getId() + " salva com sucesso");
+            var questaoSalva = this.questaoRepository.save(questao);
+            LOGGER.info("{} {} salva com sucesso", QUESTAO, questaoSalva.getId());
             return questaoSalva;
         }else{
             throw new QuestaoJaExisteException();
@@ -43,20 +45,20 @@ public class QuestaoService {
 
     public Questao atualizarQuestao(Integer id, Questao questaoAtualizada) {
         LOGGER.info("Início do método atualizar - Questão");
-        Questao questao = this.buscarQuestaoporId(id);
+        var questao = this.buscarQuestaoporId(id);
         questao.setEnunciado(questaoAtualizada.getEnunciado());
         questao.setDisciplina(questaoAtualizada.getDisciplina());
 
-        Questao questaoSalva = this.questaoRepository.save(questao);
-        LOGGER.info("Questao " + questaoSalva.getId() + " atualizada com sucesso");
+        var questaoSalva = this.questaoRepository.save(questao);
+        LOGGER.info("{} {} atualizada com sucesso", QUESTAO, questaoSalva.getId());
         return questaoSalva;
     }
 
     public void deletarQuestao(Integer id) {
         LOGGER.info("Início do método deletar - Questão");
-        Questao questao = this.buscarQuestaoporId(id);
+        var questao = this.buscarQuestaoporId(id);
         this.questaoRepository.delete(questao);
-        LOGGER.info("Questao " + id + " deletada com sucesso");
+        LOGGER.info("{} {} deletada com sucesso", QUESTAO, id);
     }
 
 }

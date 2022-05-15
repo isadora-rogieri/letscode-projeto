@@ -23,38 +23,32 @@ public class DtoChange {
     }
 
 //  Questao
-    public Questao QuestaoDtoToQuestao(QuestaoDto questaoDto) {
+    public Questao questaoDtoToQuestao(QuestaoDto questaoDto) {
         Disciplina disciplina = disciplinaService.selecionarDisciplinaById(questaoDto.getDisciplina_id());
-        Questao questao = new Questao(questaoDto.getId(), questaoDto.getEnunciado(), disciplina);
-        return questao;
+        return new Questao(questaoDto.getId(), questaoDto.getEnunciado(), disciplina);
     }
-    public QuestaoDto QuestaoToQuestaoDto(Questao questao) {
-        QuestaoDto questaoDto = new QuestaoDto(questao.getId(), questao.getEnunciado(),questao.getDisciplina().getId());
-        return questaoDto;
+    public QuestaoDto questaoToQuestaoDto(Questao questao) {
+        return new QuestaoDto(questao.getId(), questao.getEnunciado(),questao.getDisciplina().getId());
     }
 
 //  Alternativa
-    public Alternativa AlternativaDtoToAlternativa(AlternativaDto alternativaDto) {
+    public Alternativa alternativaDtoToAlternativa(AlternativaDto alternativaDto) {
         Questao questao = questaoService.buscarQuestaoporId(alternativaDto.getQuestao_id());
-        Alternativa alternativa = new Alternativa(alternativaDto.getId(), alternativaDto.getDescricao(),
+        return new Alternativa(alternativaDto.getId(), alternativaDto.getDescricao(),
                 alternativaDto.getEhResposta(), questao);
-        return alternativa;
     }
-    public AlternativaDto AlternativaToAlternativaDto(Alternativa alternativa) {
-        AlternativaDto alternativaDto = new AlternativaDto(alternativa.getId(), alternativa.getDescricao(),
+    public AlternativaDto alternativaToAlternativaDto(Alternativa alternativa) {
+        return new AlternativaDto(alternativa.getId(), alternativa.getDescricao(),
                 alternativa.getEhResposta(), alternativa.getQuestao().getId());
-        return alternativaDto;
     }
 
 //  Disciplina
-    public Disciplina DisciplinaDtoToDisciplina(DisciplinaDto disciplinaDto) {
+    public Disciplina disciplinaDtoToDisciplina(DisciplinaDto disciplinaDto) {
         Professor professor = this.professorService.selecionarProfessor(disciplinaDto.getProfessor_id());
-        Disciplina disciplina = new Disciplina(disciplinaDto.getId(), disciplinaDto.getNome(), professor);
-        return disciplina;
+        return new Disciplina(disciplinaDto.getId(), disciplinaDto.getNome(), professor);
     }
     public DisciplinaDto DisciplinaToDisciplinaDto(Disciplina disciplina) {
-        DisciplinaDto disciplinaDto = new DisciplinaDto(disciplina.getId(),disciplina.getNome(),disciplina.getProfessor().getId());
-        return disciplinaDto;
+        return new DisciplinaDto(disciplina.getId(),disciplina.getNome(),disciplina.getProfessor().getId());
     }
 
 

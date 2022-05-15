@@ -12,13 +12,11 @@ public class QuestaoAdvice {
 
     @ExceptionHandler
     public ResponseEntity tratarQuestaoNaoEncontrada(QuestaoNaoEncontradaException e){
-        ResponseEntity response = new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
-        return response;
+        return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler
     public ResponseEntity tratarQuestaoJaExistente(QuestaoJaExisteException e){
-        ResponseEntity response = new ResponseEntity(e.getMessage(), HttpStatus.CONFLICT);
-        return response;
+        return new ResponseEntity(e.getMessage(), HttpStatus.CONFLICT);
     }
 }

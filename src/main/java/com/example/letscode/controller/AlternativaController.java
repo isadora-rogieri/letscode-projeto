@@ -2,7 +2,6 @@ package com.example.letscode.controller;
 
 import com.example.letscode.dto.AlternativaDto;
 import com.example.letscode.dto.DtoChange;
-import com.example.letscode.model.Alternativa;
 import com.example.letscode.service.AlternativaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,43 +25,37 @@ public class AlternativaController {
 
     @GetMapping
     public List<AlternativaDto> listarAlterativas() {
-        List<AlternativaDto> list = this.alternativaService.listarAlternativas().stream()
-                .map(x -> this.dtoChange.AlternativaToAlternativaDto(x))
+        return this.alternativaService.listarAlternativas().stream()
+                .map(this.dtoChange::alternativaToAlternativaDto)
                 .collect(Collectors.toList());
-
-        return list;
     }
 
     @GetMapping("/{id}")
     public ResponseEntity buscarAlternativaPorId(@PathVariable("id") Integer id) {
-        Alternativa alternativa = this.alternativaService.buscarAlternativaPorId(id);
-        AlternativaDto alternativaDto = this.dtoChange.AlternativaToAlternativaDto(alternativa);
-        ResponseEntity response = new ResponseEntity(alternativaDto, HttpStatus.OK);
-        return response;
+        var alternativa = this.alternativaService.buscarAlternativaPorId(id);
+        var alternativaDto = this.dtoChange.alternativaToAlternativaDto(alternativa);
+        return new ResponseEntity(alternativaDto, HttpStatus.OK);
     }
 
     @GetMapping("/questao/{questaoId}")
     public List<AlternativaDto> buscarAlternativasPorQuestaoId(@PathVariable("questaoId") Integer questaoId) {
-        List<AlternativaDto> list = this.alternativaService.buscarAlternativasPorQuestaoId(questaoId).stream()
-                .map(x -> this.dtoChange.AlternativaToAlternativaDto(x))
+        return this.alternativaService.buscarAlternativasPorQuestaoId(questaoId).stream()
+                .map(this.dtoChange::alternativaToAlternativaDto)
                 .collect(Collectors.toList());
-        return list;
     }
 
     @PostMapping
     public ResponseEntity salvarAlternativa(@Valid @RequestBody AlternativaDto alternativaDto){
-        Alternativa alternativa = this.dtoChange.AlternativaDtoToAlternativa(alternativaDto);
+        var alternativa = this.dtoChange.alternativaDtoToAlternativa(alternativaDto);
         this.alternativaService.salvarAlternativa(alternativa);
-        ResponseEntity response = new ResponseEntity("Alternativa salva com sucesso!", HttpStatus.CREATED);
-        return response;
+        return new ResponseEntity("Alternativa salva com sucesso!", HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity atualizarAlternativa(@PathVariable("id") Integer id, @Valid @RequestBody AlternativaDto alternativaDto){
-        Alternativa alternativa = this.dtoChange.AlternativaDtoToAlternativa(alternativaDto);
+        var alternativa = this.dtoChange.alternativaDtoToAlternativa(alternativaDto);
         this.alternativaService.atualizarAlternativa(id, alternativa);
-        ResponseEntity response = new ResponseEntity("Alternativa atualizada com sucesso", HttpStatus.OK);
-        return response;
+        return new ResponseEntity("Alternativa atualizada com sucesso", HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")

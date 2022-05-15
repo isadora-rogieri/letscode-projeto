@@ -41,8 +41,8 @@ public class QuestoesServiceTest {
     public static void aposDeTodos(){ // o método deve ser sempre estático
         System.out.println("Finalizando testes QuestoesServiceTest");
     }
-    @BeforeEach
 
+    @BeforeEach
     public void inicializar(){
         professor = new Professor("Mateus");
         disciplina = new Disciplina("Matematica", professor);

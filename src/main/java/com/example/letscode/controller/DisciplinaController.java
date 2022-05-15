@@ -26,7 +26,7 @@ public class DisciplinaController {
 
     @PostMapping
     public ResponseEntity salvar(@Valid @RequestBody DisciplinaDto disciplinaDto){
-        Disciplina disciplina = this.dtoChange.DisciplinaDtoToDisciplina(disciplinaDto);
+        Disciplina disciplina = this.dtoChange.disciplinaDtoToDisciplina(disciplinaDto);
         this.disciplinaService.salvarDisciplina(disciplina);
         ResponseEntity response = new ResponseEntity("Disciplina criada com sucesso", HttpStatus.CREATED);
         return response;
@@ -50,7 +50,7 @@ public class DisciplinaController {
 
     @PutMapping("/{id}")
     public ResponseEntity atualizarDisciplina(@PathVariable("id") Integer idDisciplina, @RequestBody DisciplinaDto disciplinaDto){
-        Disciplina disciplina = this.dtoChange.DisciplinaDtoToDisciplina(disciplinaDto);
+        Disciplina disciplina = this.dtoChange.disciplinaDtoToDisciplina(disciplinaDto);
         Disciplina disciplina2 = this.disciplinaService.alterarDisciplina(idDisciplina, disciplina);
         DisciplinaDto disciplinaDtoAtt = this.dtoChange.DisciplinaToDisciplinaDto(disciplina2);
         ResponseEntity response = new ResponseEntity(disciplinaDtoAtt, HttpStatus.OK);

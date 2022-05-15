@@ -2,7 +2,6 @@ package com.example.letscode.controller;
 
 import com.example.letscode.dto.DtoChange;
 import com.example.letscode.dto.QuestaoDto;
-import com.example.letscode.model.Questao;
 import com.example.letscode.service.QuestaoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,34 +25,30 @@ public class QuestaoController {
 
     @GetMapping
     public List<QuestaoDto> listarQuestoes() {
-        List<QuestaoDto> list = this.questaoService.listarQuestoes().stream()
-                .map(x -> this.dtoChange.QuestaoToQuestaoDto(x))
+        return this.questaoService.listarQuestoes().stream()
+                .map(this.dtoChange::questaoToQuestaoDto)
                 .collect(Collectors.toList());
-        return list;
     }
 
     @GetMapping("{id}")
     public ResponseEntity buscarQuestaoPorId(@PathVariable("id") Integer id) {
-        Questao questao = this.questaoService.buscarQuestaoporId(id);
-        QuestaoDto questaoDto = this.dtoChange.QuestaoToQuestaoDto(questao);
-        ResponseEntity response = new ResponseEntity(questaoDto, HttpStatus.OK);
-        return response;
+        var questao = this.questaoService.buscarQuestaoporId(id);
+        QuestaoDto questaoDto = this.dtoChange.questaoToQuestaoDto(questao);
+        return new ResponseEntity(questaoDto, HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity salvarQuestao(@Valid @RequestBody QuestaoDto questaoDto){
-        Questao questao = this.dtoChange.QuestaoDtoToQuestao(questaoDto);
+        var questao = this.dtoChange.questaoDtoToQuestao(questaoDto);
         this.questaoService.salvarQuestao(questao);
-        ResponseEntity response = new ResponseEntity("Questão salva com sucesso!", HttpStatus.CREATED);
-        return response;
+        return new ResponseEntity("Questão salva com sucesso!", HttpStatus.CREATED);
     }
 
     @PutMapping("{id}")
     public ResponseEntity atualizarQuestao(@PathVariable("id") Integer id, @Valid @RequestBody QuestaoDto questaoDto){
-        Questao questao = this.dtoChange.QuestaoDtoToQuestao(questaoDto);
+        var questao = this.dtoChange.questaoDtoToQuestao(questaoDto);
         this.questaoService.atualizarQuestao(id, questao);
-        ResponseEntity response = new ResponseEntity("Questão atualizada com sucesso", HttpStatus.OK);
-        return response;
+        return new ResponseEntity("Questão atualizada com sucesso", HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")
