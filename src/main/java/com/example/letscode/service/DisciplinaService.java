@@ -4,14 +4,11 @@ import com.example.letscode.exception.DisciplinaJaExisteException;
 import com.example.letscode.exception.DisciplinaNaoEncontradaException;
 import com.example.letscode.exception.ProfessorNaoEncontradoException;
 import com.example.letscode.model.Disciplina;
-import com.example.letscode.model.Professor;
 import com.example.letscode.repository.DisciplinaRepository;
-import com.example.letscode.repository.ProfessorRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Service
@@ -33,10 +30,9 @@ public class DisciplinaService {
 
     }
 
-    public void salvarDisciplina(Disciplina disciplina) {
+    public Disciplina salvarDisciplina(Disciplina disciplina) {
         LOGGER.info("Início do método salvar - Disciplina");
-        if(!this.disciplinaRepository.existsByNome(disciplina.getNome())   &&
-         this.disciplinaRepository.existsByProfessorId(disciplina.getProfessor().getId())){
+        if(!this.disciplinaRepository.existsByNome(disciplina.getNome())){
 
             this.disciplinaRepository.save(disciplina);
 
@@ -46,6 +42,7 @@ public class DisciplinaService {
             throw new ProfessorNaoEncontradoException();
         }
         LOGGER.info("Disciplina salva com sucesso");
+        return disciplina;
     }
 
     public Disciplina alterarDisciplina(Integer id, Disciplina disciplinaRequest){

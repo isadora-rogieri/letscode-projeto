@@ -27,6 +27,7 @@ public class DisciplinaServiceTest {
 
     private Disciplina disciplina;
     private Disciplina disciplina2;
+    private Disciplina disciplinaRetorno;
     private List<Disciplina> disciplinaList;
 
     @BeforeAll
@@ -42,6 +43,8 @@ public class DisciplinaServiceTest {
     public void inicializar(){
         disciplina = new Disciplina("Programação Web", (new Professor("Haron")));
         disciplina.setId(2);
+        disciplinaRetorno = new Disciplina("Programação Web", (new Professor("Haron")));
+        disciplina.setId(2);
         disciplina2 = new Disciplina("Programação Web II", (new Professor("Haron")));
         disciplina2.setId(1);
         disciplinaList = new ArrayList<>();
@@ -50,7 +53,18 @@ public class DisciplinaServiceTest {
 
     }
 
-    @Test()
+    @Test
+    void salvarDisciplina(){
+
+        Mockito.when(disciplinaRepository.save(disciplina)).thenReturn(disciplinaRetorno);
+        disciplinaRetorno = disciplinaService.salvarDisciplina(disciplina);
+
+        Assertions.assertNotNull(disciplinaRetorno);
+        Assertions.assertEquals(disciplina.getId(), disciplinaRetorno.getId());
+        Assertions.assertEquals(disciplina.getNome(), disciplinaRetorno.getNome());
+        Assertions.assertEquals(disciplina.getProfessor(), disciplinaRetorno.getProfessor());
+    }
+    @Test
     void selecionaDisciplina(){
 
         Mockito.when(disciplinaRepository.findDisciplinaById(2)).thenReturn(Optional.of(disciplina));
