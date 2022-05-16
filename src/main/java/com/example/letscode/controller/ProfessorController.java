@@ -20,7 +20,7 @@ public class ProfessorController {
         this.professorService = professorService;
     }
 
-    @PostMapping
+    @PostMapping("/salva")
     public ResponseEntity salvarProfessor(@RequestBody Professor professor){
         this.professorService.salvarProfessor(professor);
         ResponseEntity response = new ResponseEntity("Professor salvo com sucesso", HttpStatus.CREATED);

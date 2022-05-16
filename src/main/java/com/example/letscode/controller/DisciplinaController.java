@@ -24,7 +24,7 @@ public class DisciplinaController {
         this.dtoChange = dtoChange;
     }
 
-    @PostMapping
+    @PostMapping("/salva")
     public ResponseEntity salvar(@Valid @RequestBody DisciplinaDto disciplinaDto){
         Disciplina disciplina = this.dtoChange.disciplinaDtoToDisciplina(disciplinaDto);
         this.disciplinaService.salvarDisciplina(disciplina);

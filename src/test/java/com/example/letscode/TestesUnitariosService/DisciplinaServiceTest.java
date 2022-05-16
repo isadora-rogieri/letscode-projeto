@@ -33,7 +33,7 @@ public class DisciplinaServiceTest {
     private List<Disciplina> disciplinaList;
 
     @BeforeAll
-    public static void atesDeTodos(){ // o método deve ser sempre estático
+    public static void antesDeTodos(){ // o método deve ser sempre estático
         System.out.println("Iniciando testes DisciplinaServiceTest");
     }
     @AfterAll

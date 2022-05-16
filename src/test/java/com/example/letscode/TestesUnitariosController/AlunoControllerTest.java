@@ -35,7 +35,7 @@ public class AlunoControllerTest{
 
     @Test
     @WithMockUser
-    void listarTdososAlunos() throws Exception {
+    void listarTodosAlunos() throws Exception {
 
         List<Aluno> alunoList = new ArrayList<>();
         alunoList.add(new Aluno("Alan", "MTLA125478", LocalDate.now()));
