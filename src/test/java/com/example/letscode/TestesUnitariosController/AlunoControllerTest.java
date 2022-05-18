@@ -4,6 +4,8 @@ import com.example.letscode.controller.AlunoController;
 import com.example.letscode.dto.AlunoDto;
 import com.example.letscode.model.Aluno;
 import com.example.letscode.service.AlunoService;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -70,4 +72,20 @@ public class AlunoControllerTest{
                         .flashAttr("aluno", aluno)
         ).andDo(MockMvcResultHandlers.print());
     }
+
+    @Test
+    @WithMockUser
+    void listarTodosOsAlunosTestController() throws Exception{
+
+        List<Aluno> alunoList = new ArrayList<>();
+        alunoList.add(new Aluno("Mateus", "MTLA478569", LocalDate.now()));
+        alunoList.add(new Aluno("Marcos", "MTLA878569", LocalDate.now()));
+
+        Mockito.when(alunoService.listarTodos()).thenReturn(alunoList);
+
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/aluno"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
 }
