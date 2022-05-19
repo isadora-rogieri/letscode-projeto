@@ -33,7 +33,7 @@ public class QuestaoController {
     @GetMapping("{id}")
     public ResponseEntity buscarQuestaoPorId(@PathVariable("id") Integer id) {
         var questao = this.questaoService.buscarQuestaoporId(id);
-        QuestaoDto questaoDto = this.dtoChange.questaoToQuestaoDto(questao);
+        var questaoDto = this.dtoChange.questaoToQuestaoDto(questao);
         return new ResponseEntity(questaoDto, HttpStatus.OK);
     }
 

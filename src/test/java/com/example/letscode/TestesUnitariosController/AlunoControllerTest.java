@@ -27,7 +27,7 @@ import java.util.List;
 @ContextConfiguration
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(value = AlunoController.class)
-public class AlunoControllerTest{
+class AlunoControllerTest{
 
     @MockBean
     private AlunoService alunoService;

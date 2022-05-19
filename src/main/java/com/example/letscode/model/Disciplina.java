@@ -5,7 +5,6 @@ import lombok.*;
 import javax.persistence.*;
 
 @AllArgsConstructor
-@ToString
 @NoArgsConstructor
 @Getter
 @Setter
@@ -27,8 +26,7 @@ public class Disciplina {
 
     @Override
     public String toString(){
-        String res = "Disciplina " + this.nome + "; id: " + this.id + "\n\r" +
+        return "Disciplina " + this.nome + "; id: " + this.id + "\n\r" +
                 "Professor responsavel " + this.professor.getNome() + "\n\r";
-        return res;
     }
 }

@@ -16,29 +16,27 @@ import java.util.Map;
 
 @ControllerAdvice
 public class DisciplinaAdvice {
-    private final Logger LOGGER = LoggerFactory.getLogger(ProfessorAdvice.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(DisciplinaAdvice.class);
 
     @ExceptionHandler
     public ResponseEntity tratarExcecao(DisciplinaNaoEncontradaException e){
-        ResponseEntity response = new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
-        return  response;
+        return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler
     public ResponseEntity tratarExcecao(DisciplinaJaExisteException e){
-        ResponseEntity response = new ResponseEntity(e.getMessage(), HttpStatus.CONFLICT);
-        return  response;
+        return new ResponseEntity(e.getMessage(), HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler
     public ResponseEntity tratarRestricoesBean(MethodArgumentNotValidException e){
         Map<String, String> erros = new HashMap<>();
 
-        for (int indice = 0; indice < e.getBindingResult().getAllErrors().size(); indice++){
+        for (var indice = 0; indice < e.getBindingResult().getAllErrors().size(); indice++){
 
             String fieldName =  ((FieldError) e.getBindingResult().getAllErrors().get(indice)).getField();
             String errorMessage = ((FieldError) e.getBindingResult().getAllErrors().get(indice)).getDefaultMessage();
-            String erroFormatado = String.format("Erro no campo %s - %s",fieldName,errorMessage);
+            var erroFormatado = String.format("Erro no campo %s - %s",fieldName,errorMessage);
             erros.put(String.format("Erro %s ",indice ), String.format("Erro no campo %s - %s",fieldName,errorMessage));
             LOGGER.debug(erroFormatado);
         }

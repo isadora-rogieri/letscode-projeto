@@ -47,7 +47,7 @@ public class DisciplinaService {
 
     public Disciplina alterarDisciplina(Integer id, Disciplina disciplinaRequest){
         LOGGER.info("Início do método alterar  - Disciplina");
-        Disciplina disciplina = this.selecionarDisciplina(id);
+        var disciplina = this.selecionarDisciplina(id);
         disciplina.setNome(disciplinaRequest.getNome());
         this.salvarDisciplina(disciplina);
         LOGGER.info("Disciplina alterada com sucesso");
@@ -57,7 +57,7 @@ public class DisciplinaService {
 
     public Disciplina deletarDisciplina(Integer id){
         LOGGER.info("Início do método deletar - Disciplina");
-        Disciplina disciplina = selecionarDisciplina(id);
+        var disciplina = selecionarDisciplina(id);
         this.disciplinaRepository.delete(disciplina);
         LOGGER.info("Disciplina deletada com sucesso");
         return disciplina;

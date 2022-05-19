@@ -21,25 +21,23 @@ public class AlunoAdvice {
 
     @ExceptionHandler
     public ResponseEntity tratarExcecao(AlunoNaoEncontradoException e){
-        ResponseEntity response = new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
-        return response;
+        return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler
     public ResponseEntity tratarExcecao(AlunoJaExisteException e){
-        ResponseEntity response = new ResponseEntity(e.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
-        return response;
+        return new ResponseEntity(e.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @ExceptionHandler
     public ResponseEntity tratarRestricoesBean(MethodArgumentNotValidException e){
         Map<String, String> erros = new HashMap<>();
 
-        for (int indice = 0; indice < e.getBindingResult().getAllErrors().size(); indice++){
+        for (var indice = 0; indice < e.getBindingResult().getAllErrors().size(); indice++){
 
             String fieldName =  ((FieldError) e.getBindingResult().getAllErrors().get(indice)).getField();
             String errorMessage = ((FieldError) e.getBindingResult().getAllErrors().get(indice)).getDefaultMessage();
-            String erroFormatado = String.format("Erro no campo %s - %s",fieldName,errorMessage);
+            var erroFormatado = String.format("Erro no campo %s - %s",fieldName,errorMessage);
             erros.put(String.format("Erro %s ",indice ), String.format("Erro no campo %s - %s",fieldName,errorMessage));
             LOGGER.debug(erroFormatado);
         }

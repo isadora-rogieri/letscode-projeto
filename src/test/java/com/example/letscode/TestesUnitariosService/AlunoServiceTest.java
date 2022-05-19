@@ -16,9 +16,11 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-public class AlunoServiceTest {
+class AlunoServiceTest {
 
     @InjectMocks
     private AlunoService alunoService;

@@ -22,9 +22,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-public class AlternativaServiceTest {
+class AlternativaServiceTest {
 
     @InjectMocks
     private AlternativaService alternativaService;
@@ -57,7 +58,6 @@ public class AlternativaServiceTest {
         Assertions.assertNotNull(alternativas);
         Assertions.assertFalse(alternativas.isEmpty());
         assertEquals(5, listaAlternativas.size());
-
     }
 
     @Test
@@ -150,6 +150,46 @@ public class AlternativaServiceTest {
             alternativaService.salvarAlternativa(alternativaSalvar);
         });
         Assertions.assertEquals("Alternativa já existe", ex.getMessage());
+    }
+
+    @Test
+    void deveRetornarAlternativaAtualizada() {
+
+        Questao questao = new Questao(4,"questao teste", new Disciplina("disciplina teste", new Professor("prof")));
+        Alternativa alternativaAtualizada = new Alternativa( 5,"Alternativa atualizada",
+                false, questao);
+
+        Mockito.when(alternativaRepository.findById(5))
+                .thenReturn(Optional.of(listaAlternativas.get(4)));
+
+        Alternativa alternativaSalva = listaAlternativas.get(4);
+        alternativaSalva.setDescricao(alternativaAtualizada.getDescricao());
+        alternativaSalva.setEhResposta(alternativaAtualizada.getEhResposta());
+        alternativaSalva.setQuestao(alternativaAtualizada.getQuestao());
+
+        Mockito.when(alternativaRepository.save(alternativaSalva))
+                .thenReturn(alternativaAtualizada);
+
+        Alternativa alternativaRetorno = alternativaService.atualizarAlternativa(5, alternativaAtualizada);
+
+        Assertions.assertNotNull(alternativaRetorno);
+        assertEquals(5, alternativaRetorno.getId());
+        assertEquals("Alternativa atualizada", alternativaRetorno.getDescricao());
+        assertEquals(false, alternativaRetorno.getEhResposta());
+        assertEquals(questao, alternativaRetorno.getQuestao());
+    }
+
+
+    @Test
+    void deveChamarMetodoDeletarPassandoAlternativa() {
+
+        Mockito.when(alternativaRepository.findById(1))
+                .thenReturn(Optional.of(listaAlternativas.get(0)));
+
+        alternativaService.deletarAlternativa(1);
+
+        verify(alternativaRepository).delete(listaAlternativas.get(0));
+
     }
 
 

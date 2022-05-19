@@ -44,7 +44,7 @@ public class AlunoService {
 
     public void alterarAluno(Integer id, Aluno alunoRequest){
         LOGGER.info("Início do método alterar - Aluno");
-        Aluno aluno = this.selecionarAlunoById(id);
+        var aluno = this.selecionarAlunoById(id);
         aluno.setNome(alunoRequest.getNome());
         this.alunoRepository.save(aluno);
         LOGGER.info("Aluno alterado com sucesso");
@@ -52,7 +52,7 @@ public class AlunoService {
 
     public Aluno deletarAluno(Integer id){
         LOGGER.info("Início do método deletar - Aluno");
-        Aluno aluno = selecionarAlunoById(id);
+        var aluno = selecionarAlunoById(id);
         this.alunoRepository.delete(aluno);
         LOGGER.info("Aluno deletado com sucesso");
         return aluno;

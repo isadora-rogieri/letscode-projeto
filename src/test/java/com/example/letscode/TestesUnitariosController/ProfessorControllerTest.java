@@ -22,7 +22,7 @@ import java.util.List;
 @ContextConfiguration
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(value = ProfessorController.class)
-public class ProfessorControllerTest {
+class ProfessorControllerTest {
 
     @MockBean
     private ProfessorService professorService;

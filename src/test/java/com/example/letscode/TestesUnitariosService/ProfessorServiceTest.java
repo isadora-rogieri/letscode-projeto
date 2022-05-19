@@ -17,7 +17,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-public class ProfessorServiceTest {
+class ProfessorServiceTest {
 
     @InjectMocks
     private ProfessorService professorService;

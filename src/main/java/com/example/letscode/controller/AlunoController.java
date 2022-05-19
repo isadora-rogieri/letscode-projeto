@@ -23,8 +23,7 @@ public class AlunoController {
     @PostMapping("/salva")
     public ResponseEntity salvar(@Valid @RequestBody Aluno aluno) {
         this.alunoService.salvarAluno(aluno);
-        ResponseEntity response = new ResponseEntity("Aluno salvo com sucesso", HttpStatus.CREATED);
-        return response;
+        return new ResponseEntity("Aluno salvo com sucesso", HttpStatus.CREATED);
     }
 //    @PostMapping("/salva")
 //    public ResponseEntity salvar(@ModelAttribute @Valid @RequestBody AlunoDto alunoDto, BindingResult errors) {
@@ -45,10 +44,8 @@ public class AlunoController {
 
     @GetMapping("/{id}")
     public ResponseEntity selecionarAlunoById(@PathVariable("id") Integer id) {
-        Aluno aluno = this.alunoService.selecionarAlunoById(id);
-        ResponseEntity response = new ResponseEntity(aluno, HttpStatus.OK);
-        return response;
-
+        var aluno = this.alunoService.selecionarAlunoById(id);
+        return new ResponseEntity(aluno, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
@@ -58,8 +55,7 @@ public class AlunoController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity deletarAluno(@PathVariable("id") Integer idAluno) {
-        Aluno aluno = this.alunoService.deletarAluno(idAluno);
-        ResponseEntity response = new ResponseEntity("Aluno deletado com sucesso", HttpStatus.OK);
-        return response;
+        this.alunoService.deletarAluno(idAluno);
+        return new ResponseEntity("Aluno deletado com sucesso", HttpStatus.OK);
     }
 }

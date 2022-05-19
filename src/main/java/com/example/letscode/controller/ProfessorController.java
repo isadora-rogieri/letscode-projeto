@@ -1,7 +1,5 @@
 package com.example.letscode.controller;
 
-import com.example.letscode.model.Aluno;
-import com.example.letscode.model.Disciplina;
 import com.example.letscode.model.Professor;
 import com.example.letscode.service.ProfessorService;
 import org.springframework.http.HttpStatus;
@@ -23,8 +21,7 @@ public class ProfessorController {
     @PostMapping("/salva")
     public ResponseEntity salvarProfessor(@RequestBody Professor professor){
         this.professorService.salvarProfessor(professor);
-        ResponseEntity response = new ResponseEntity("Professor salvo com sucesso", HttpStatus.CREATED);
-        return response;
+        return new ResponseEntity("Professor salvo com sucesso", HttpStatus.CREATED);
     }
 
     @GetMapping
@@ -34,22 +31,19 @@ public class ProfessorController {
 
     @GetMapping("/{id}")
     public ResponseEntity selecionarProfessorById(@PathVariable("id") Integer idProfessor) {
-        Professor professor = this.professorService.selecionarProfessorById(idProfessor);
-        ResponseEntity response = new ResponseEntity(professor, HttpStatus.OK);
-        return response;
+        var professor = this.professorService.selecionarProfessorById(idProfessor);
+        return new ResponseEntity(professor, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity atualizarProfessor(@PathVariable("id") Integer idProfessor, @RequestBody Professor professor){
-        Professor professor2 = this.professorService.alterarProfessor(idProfessor, professor);
-        ResponseEntity response = new ResponseEntity(professor2, HttpStatus.OK);
-        return  response;
+        var professor2 = this.professorService.alterarProfessor(idProfessor, professor);
+        return new ResponseEntity(professor2, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity deletarProfessor(@PathVariable("id") Integer idProfessor){
-        Professor professor = this.professorService.deletarProfessor(idProfessor);
-        ResponseEntity response = new ResponseEntity("Professor deletado com sucesso", HttpStatus.OK);
-        return response;
+        this.professorService.deletarProfessor(idProfessor);
+        return new ResponseEntity("Professor deletado com sucesso", HttpStatus.OK);
     }
 }

@@ -4,7 +4,6 @@ import com.example.letscode.validator.MatriculaConstraint;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -12,7 +11,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
-@ToString
 @NoArgsConstructor
 @Getter
 @Setter
@@ -44,9 +42,8 @@ public class Aluno {
 
     @Override
     public String toString(){
-        String res = "Aluno " + this.nome + "; id: " + this.id + "; matricula: " + this.matricula + "\n\r" +
+        return "Aluno " + this.nome + "; id: " + this.id + "; matricula: " + this.matricula + "\n\r" +
                 "nascido em " + this.dataNascimento.toString() + "\n\r";
-        return res;
     }
 }
 

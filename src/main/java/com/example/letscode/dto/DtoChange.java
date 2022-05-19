@@ -2,7 +2,6 @@ package com.example.letscode.dto;
 
 import com.example.letscode.model.Alternativa;
 import com.example.letscode.model.Disciplina;
-import com.example.letscode.model.Professor;
 import com.example.letscode.model.Questao;
 import com.example.letscode.service.DisciplinaService;
 import com.example.letscode.service.ProfessorService;
@@ -24,7 +23,7 @@ public class DtoChange {
 
 //  Questao
     public Questao questaoDtoToQuestao(QuestaoDto questaoDto) {
-        Disciplina disciplina = disciplinaService.selecionarDisciplinaById(questaoDto.getDisciplina_id());
+        var disciplina = disciplinaService.selecionarDisciplinaById(questaoDto.getDisciplina_id());
         return new Questao(questaoDto.getId(), questaoDto.getEnunciado(), disciplina);
     }
     public QuestaoDto questaoToQuestaoDto(Questao questao) {
@@ -33,7 +32,7 @@ public class DtoChange {
 
 //  Alternativa
     public Alternativa alternativaDtoToAlternativa(AlternativaDto alternativaDto) {
-        Questao questao = questaoService.buscarQuestaoporId(alternativaDto.getQuestao_id());
+        var questao = questaoService.buscarQuestaoporId(alternativaDto.getQuestao_id());
         return new Alternativa(alternativaDto.getId(), alternativaDto.getDescricao(),
                 alternativaDto.getEhResposta(), questao);
     }
@@ -44,7 +43,7 @@ public class DtoChange {
 
 //  Disciplina
     public Disciplina disciplinaDtoToDisciplina(DisciplinaDto disciplinaDto) {
-        Professor professor = this.professorService.selecionarProfessor(disciplinaDto.getProfessor_id());
+        var professor = this.professorService.selecionarProfessor(disciplinaDto.getProfessor_id());
         return new Disciplina(disciplinaDto.getId(), disciplinaDto.getNome(), professor);
     }
     public DisciplinaDto DisciplinaToDisciplinaDto(Disciplina disciplina) {

@@ -21,7 +21,7 @@ public class ProfessorService {
     }
 
     public Professor selecionarProfessor(Integer id){
-        LOGGER.info("Selecionando Professor pelo ID ", id);
+        LOGGER.info("Selecionando Professor pelo ID {}", id);
         return this.professorRepository.findProfessorById(id).orElseThrow(ProfessorNaoEncontradoException::new);
     }
 
@@ -42,7 +42,7 @@ public class ProfessorService {
 
     public Professor alterarProfessor(Integer id, Professor professorRequest){
         LOGGER.info("Início do método alterar - Professor");
-        Professor professor = this.selecionarProfessor(id);
+        var professor = this.selecionarProfessor(id);
         professor.setNome(professorRequest.getNome());
         this.salvarProfessor(professor);
         LOGGER.info("Professor alterado com sucesso");
@@ -51,7 +51,7 @@ public class ProfessorService {
 
     public Professor deletarProfessor(Integer id){
         LOGGER.info("Início do método deletar - Professor");
-        Professor professor = selecionarProfessor(id);
+        var professor = selecionarProfessor(id);
         this.professorRepository.delete(professor);
         LOGGER.info("Professor deletado com sucesso");
         return professor;

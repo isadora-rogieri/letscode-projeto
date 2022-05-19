@@ -12,14 +12,12 @@ public class ProfessorAdvice {
 
     @ExceptionHandler
     public ResponseEntity tratarExcecao(ProfessorNaoEncontradoException e){
-        ResponseEntity response = new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
-        return response;
+        return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler
     public ResponseEntity tratarExcecao(ProfessorJaExisteException e){
-        ResponseEntity response = new ResponseEntity(e.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
-        return response;
+        return new ResponseEntity(e.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 }
 

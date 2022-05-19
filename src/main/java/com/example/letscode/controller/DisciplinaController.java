@@ -2,7 +2,6 @@ package com.example.letscode.controller;
 
 import com.example.letscode.dto.DisciplinaDto;
 import com.example.letscode.dto.DtoChange;
-import com.example.letscode.model.Disciplina;
 import com.example.letscode.service.DisciplinaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,42 +25,37 @@ public class DisciplinaController {
 
     @PostMapping("/salva")
     public ResponseEntity salvar(@Valid @RequestBody DisciplinaDto disciplinaDto){
-        Disciplina disciplina = this.dtoChange.disciplinaDtoToDisciplina(disciplinaDto);
+        var disciplina = this.dtoChange.disciplinaDtoToDisciplina(disciplinaDto);
         this.disciplinaService.salvarDisciplina(disciplina);
-        ResponseEntity response = new ResponseEntity("Disciplina criada com sucesso", HttpStatus.CREATED);
-        return response;
+        return new ResponseEntity("Disciplina criada com sucesso", HttpStatus.CREATED);
     }
 
     @GetMapping
     public List<DisciplinaDto> listarDisciplinas(){
-        List<DisciplinaDto> list = this.disciplinaService.listarTodos().stream()
-                .map(x -> this.dtoChange.DisciplinaToDisciplinaDto(x))
+        return this.disciplinaService.listarTodos().stream()
+                .map(this.dtoChange::DisciplinaToDisciplinaDto)
                 .collect(Collectors.toList());
-        return list;
     }
 
     @GetMapping("/{id}")
     public ResponseEntity selecionarDisciplinaById(@PathVariable("id") Integer id){
-        Disciplina disciplina =  this.disciplinaService.selecionarDisciplinaById(id);
-        DisciplinaDto disciplinaDto = this.dtoChange.DisciplinaToDisciplinaDto(disciplina);
-        ResponseEntity response = new ResponseEntity(disciplinaDto, HttpStatus.OK);
-        return  response;
+        var disciplina =  this.disciplinaService.selecionarDisciplinaById(id);
+        var disciplinaDto = this.dtoChange.DisciplinaToDisciplinaDto(disciplina);
+        return new ResponseEntity(disciplinaDto, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity atualizarDisciplina(@PathVariable("id") Integer idDisciplina, @RequestBody DisciplinaDto disciplinaDto){
-        Disciplina disciplina = this.dtoChange.disciplinaDtoToDisciplina(disciplinaDto);
-        Disciplina disciplina2 = this.disciplinaService.alterarDisciplina(idDisciplina, disciplina);
-        DisciplinaDto disciplinaDtoAtt = this.dtoChange.DisciplinaToDisciplinaDto(disciplina2);
-        ResponseEntity response = new ResponseEntity(disciplinaDtoAtt, HttpStatus.OK);
-        return  response;
+        var disciplina = this.dtoChange.disciplinaDtoToDisciplina(disciplinaDto);
+        var disciplina2 = this.disciplinaService.alterarDisciplina(idDisciplina, disciplina);
+        var disciplinaDtoAtt = this.dtoChange.DisciplinaToDisciplinaDto(disciplina2);
+        return new ResponseEntity(disciplinaDtoAtt, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity deletarDisciplina(@PathVariable("id") Integer idDisciplina){
-       Disciplina disciplina = this.disciplinaService.deletarDisciplina(idDisciplina);
-       ResponseEntity response = new ResponseEntity("Disciplina deletada com sucesso", HttpStatus.OK);
-       return  response;
+       this.disciplinaService.deletarDisciplina(idDisciplina);
+       return new ResponseEntity("Disciplina deletada com sucesso", HttpStatus.OK);
     }
 
 
