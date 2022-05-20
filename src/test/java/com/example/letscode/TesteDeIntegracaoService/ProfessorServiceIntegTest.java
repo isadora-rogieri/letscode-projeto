@@ -15,13 +15,14 @@ class ProfessorServiceIntegTest {
     @Autowired
     ProfessorService professorService;
 
+
+
     @Test
     @Transactional
     void salvarProfTestInteg(){
         Professor professor = new Professor();
         professor.setId(1);
         professor.setNome("Haron");
-
 
         Professor profSalvar = professorService.salvarProfessor(professor);
 
@@ -36,4 +37,14 @@ class ProfessorServiceIntegTest {
         assertNotNull(professorList);
         assertTrue(professorList.size()>0);
     }
+    @Test
+    void buscarProfessorTeste(){
+       Professor professor1 = professorService.selecionarProfessor(1);
+
+        assertNotNull(professor1);
+        assertTrue(professor1.getId() ==1);
+    }
+
+
+
 }
