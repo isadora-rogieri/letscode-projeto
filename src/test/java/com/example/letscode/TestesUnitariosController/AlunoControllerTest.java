@@ -3,6 +3,8 @@ package com.example.letscode.TestesUnitariosController;
 import com.example.letscode.controller.AlunoController;
 import com.example.letscode.dto.AlunoDto;
 import com.example.letscode.model.Aluno;
+import com.example.letscode.model.Disciplina;
+import com.example.letscode.model.Professor;
 import com.example.letscode.service.AlunoService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
@@ -12,6 +14,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -27,7 +30,7 @@ import java.util.List;
 @ContextConfiguration
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(value = AlunoController.class)
-class AlunoControllerTest{
+class AlunoControllerTest {
 
     @MockBean
     private AlunoService alunoService;
@@ -52,9 +55,10 @@ class AlunoControllerTest{
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
     }
+
     @Test
     @WithMockUser
-    void salvarAlunoTestController() throws Exception{
+    void salvarAlunoTestController() throws Exception {
 
         AlunoDto alunoDto = new AlunoDto(1, "Nome", "MTLA120395", LocalDate.now());
 
@@ -75,7 +79,7 @@ class AlunoControllerTest{
 
     @Test
     @WithMockUser
-    void listarTodosOsAlunosTestController() throws Exception{
+    void listarTodosOsAlunosTestController() throws Exception {
 
         List<Aluno> alunoList = new ArrayList<>();
         alunoList.add(new Aluno("Mateus", "MTLA478569", LocalDate.now()));
@@ -88,4 +92,31 @@ class AlunoControllerTest{
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
+    @Test
+    @WithMockUser
+    void deletarAlunoTestController() throws Exception {
+
+
+        AlunoDto alunoDto = new AlunoDto(1, "Nome", "MTLA120395", LocalDate.now());
+
+        Aluno aluno = new Aluno();
+        aluno.setId(alunoDto.getId());
+        aluno.setNome(alunoDto.getNome());
+        aluno.setDataNascimento(alunoDto.getDataNascimento());
+        aluno.setMatricula(alunoDto.getMatricula());
+
+        Mockito.when(alunoService.deletarAluno(aluno.getId())).thenReturn(aluno);
+
+        this.mockMvc.perform(
+                        MockMvcRequestBuilders
+                                .delete("/aluno/1")
+                                .accept(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
+
+                )
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string("Aluno deletado com sucesso"));
+
+
+    }
 }
