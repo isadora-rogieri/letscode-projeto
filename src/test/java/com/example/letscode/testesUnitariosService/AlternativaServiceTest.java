@@ -1,4 +1,4 @@
-package com.example.letscode.TestesUnitariosService;
+package com.example.letscode.testesUnitariosService;
 
 import com.example.letscode.exception.AlternativaJaExisteException;
 import com.example.letscode.model.Alternativa;

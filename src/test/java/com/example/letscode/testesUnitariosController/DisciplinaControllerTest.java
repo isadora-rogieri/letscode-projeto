@@ -1,4 +1,4 @@
-package com.example.letscode.TestesUnitariosController;
+package com.example.letscode.testesUnitariosController;
 
 import com.example.letscode.controller.DisciplinaController;
 import com.example.letscode.dto.DisciplinaDto;

@@ -1,4 +1,4 @@
-package com.example.letscode.TestesUnitariosController;
+package com.example.letscode.testesUnitariosController;
 
 import com.example.letscode.controller.ProfessorController;
 import com.example.letscode.model.Professor;

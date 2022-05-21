@@ -1,4 +1,4 @@
-package com.example.letscode.TestesUnitariosService;
+package com.example.letscode.testesUnitariosService;
 
 import com.example.letscode.model.Disciplina;
 import com.example.letscode.model.Professor;

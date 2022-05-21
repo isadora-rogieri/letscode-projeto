@@ -1,4 +1,4 @@
-package com.example.letscode.TestesUnitariosService;
+package com.example.letscode.testesUnitariosService;
 
 import com.example.letscode.model.Aluno;
 import com.example.letscode.repository.AlunoRepository;
@@ -16,8 +16,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class AlunoServiceTest {

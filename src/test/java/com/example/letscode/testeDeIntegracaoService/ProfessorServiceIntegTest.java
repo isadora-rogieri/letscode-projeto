@@ -1,15 +1,16 @@
-package com.example.letscode.TesteDeIntegracaoService;
+package com.example.letscode.testeDeIntegracaoService;
 
 import com.example.letscode.model.Professor;
 import com.example.letscode.service.ProfessorService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import javax.transaction.Transactional;
+
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ProfessorServiceIntegTest {
 
     @Autowired
@@ -18,7 +19,6 @@ class ProfessorServiceIntegTest {
 
 
     @Test
-    @Transactional
     void salvarProfTestInteg(){
         Professor professor = new Professor();
         professor.setId(1);

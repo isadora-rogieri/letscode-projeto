@@ -1,9 +1,7 @@
-package com.example.letscode.TesteDeIntegracaoService;
+package com.example.letscode.testeDeIntegracaoService;
 
 import com.example.letscode.model.Aluno;
 import com.example.letscode.service.AlunoService;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

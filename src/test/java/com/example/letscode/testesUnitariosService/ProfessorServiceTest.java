@@ -1,4 +1,4 @@
-package com.example.letscode.TestesUnitariosService;
+package com.example.letscode.testesUnitariosService;
 
 import com.example.letscode.model.Professor;
 import com.example.letscode.repository.ProfessorRepository;
@@ -93,4 +93,5 @@ class ProfessorServiceTest {
         System.out.println("Listando professor Id: " + professorSalvar.getId() + " Nome: " + professorSalvar.getNome());
 
     }
+
 }
