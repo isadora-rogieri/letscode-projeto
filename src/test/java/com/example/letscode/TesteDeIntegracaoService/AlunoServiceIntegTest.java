@@ -2,6 +2,7 @@ package com.example.letscode.TesteDeIntegracaoService;
 
 import com.example.letscode.model.Aluno;
 import com.example.letscode.service.AlunoService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,24 @@ class AlunoServiceIntegTest {
 
         assertNotNull(alunos);
         assertTrue(alunos.size()>0);
+    }
+
+    @Test
+    void atualizarAluno() {
+        Aluno aluno = alunoService.selecionarAlunoById(1);
+
+        aluno.setNome("Marcos");
+        alunoService.alterarAluno(aluno.getId(), aluno);
+
+       assertNotNull(aluno);
+       assertEquals(aluno.getNome(), "Marcos");
+       assertEquals(aluno.getId(), 1);
+    }
+
+    @Test
+    void deletarAluno() {
+
+        Aluno aluno = alunoService.selecionarAlunoById(1);
+        alunoService.deletarAluno(1);
     }
 }
