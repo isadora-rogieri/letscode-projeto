@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
 @ExtendWith(MockitoExtension.class)
 class AlunoServiceTest {
@@ -128,7 +130,40 @@ class AlunoServiceTest {
         assertEquals(2, alunoList.size());
         for ( Aluno aluno : alunos){
             System.out.println("Listando aluno Id: " + aluno.getId() + " | Nome: " + aluno.getNome() + " | Matricula: " + aluno.getMatricula() + " | Data de Nascimento: " + aluno.getDataNascimento());
-
         }
+    }
+    @Test
+    @DisplayName("Teste deletar alunos")
+    void deleteAluno() {
+
+        when(alunoRepository.findAlunoById(alunoAddList.getId()))
+                .thenReturn(Optional.of(alunoAddList));
+
+        doNothing().when(alunoRepository).delete(alunoAddList);
+        alunoService.deletarAluno(alunoAddList.getId());
+
+        verify(alunoRepository, times(1)).delete(alunoAddList);
+
+    }
+    @Test
+    @DisplayName("teste atualizar aluno")
+    void atualizarAluno(){
+        Aluno aluno1 = new Aluno("Ma", "MTLA147441", LocalDate.now());
+        aluno1.setId(5);
+        Aluno aluno2 = new Aluno();
+        aluno2.setNome("Marcos");
+        aluno2.setMatricula(aluno1.getMatricula());
+        aluno2.setId(aluno1.getId());
+        aluno2.setDataNascimento(aluno1.getDataNascimento());
+
+        when(alunoRepository.findAlunoById(aluno1.getId())).thenReturn(Optional.of(aluno1));
+        alunoService.alterarAluno(5, aluno2);
+
+        assertNotNull(aluno1);
+        assertNotNull(aluno2);
+        assertEquals(aluno1.getId(),aluno2.getId());
+        assertEquals(aluno1.getNome(), aluno2.getNome());
+        assertEquals(aluno1.getMatricula(), aluno2.getMatricula());
+        assertEquals(aluno1.getDataNascimento(), aluno2.getDataNascimento());
     }
 }

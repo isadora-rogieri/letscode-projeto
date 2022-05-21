@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
 @ExtendWith(MockitoExtension.class)
 class QuestoesServiceTest {
@@ -96,5 +98,18 @@ class QuestoesServiceTest {
         for (Questao questoe : questoes){
             System.out.println("Listando questão Id: " + questoe.getId() + " | Questão enunciado: " + questoe.getEnunciado() + " | Disciplina: " + questoe.getDisciplina().getNome() + " | Professor: " + questoe.getDisciplina().getProfessor().getNome());
         }
+    }
+    @Test
+    @DisplayName("Teste deletar questão")
+    void deletarDisciplina() {
+
+        when(questaoRepository.findById(questaoAddList.getId()))
+                .thenReturn(Optional.of(questaoAddList));
+
+        doNothing().when(questaoRepository).delete(questaoAddList);
+        questaoService.deletarQuestao(questaoAddList.getId());
+
+        verify(questaoRepository, times(1)).delete(questaoAddList);
+
     }
 }

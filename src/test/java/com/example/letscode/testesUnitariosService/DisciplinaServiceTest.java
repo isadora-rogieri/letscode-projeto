@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
 @ExtendWith(MockitoExtension.class)
 class DisciplinaServiceTest {
@@ -95,4 +97,36 @@ class DisciplinaServiceTest {
 
         }
   }
+    @Test
+    @DisplayName("Teste deletar disciplina")
+    void deleteDisciplina() {
+
+        when(disciplinaRepository.findDisciplinaById(disciplina2.getId()))
+                .thenReturn(Optional.of(disciplina2));
+
+        doNothing().when(disciplinaRepository).delete(disciplina2);
+        disciplinaService.deletarDisciplina(disciplina2.getId());
+
+        verify(disciplinaRepository, times(1)).delete(disciplina2);
+
+    }
+    @Test
+    @DisplayName("teste atualizar aluno")
+    void atualizarDisciplina(){
+        Disciplina disciplina1 = new Disciplina(2, "Artes", new Professor("Jove"));
+        disciplina1.setId(5);
+        Disciplina disciplina2 = new Disciplina();
+        disciplina2.setNome("Inglês");
+        disciplina2.setProfessor(disciplina1.getProfessor());
+        disciplina2.setId(disciplina1.getId());
+
+        when(disciplinaRepository.findDisciplinaById(disciplina1.getId())).thenReturn(Optional.of(disciplina1));
+        disciplinaService.alterarDisciplina(5, disciplina2);
+
+        assertNotNull(disciplina2);
+        assertNotNull(disciplina1);
+        assertEquals(disciplina1.getId(),disciplina2.getId());
+        assertEquals(disciplina1.getNome(), disciplina2.getNome());
+        assertEquals(disciplina1.getProfessor(), disciplina2.getProfessor());
+    }
 }
