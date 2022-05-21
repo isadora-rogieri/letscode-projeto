@@ -8,6 +8,8 @@ import com.example.letscode.model.Professor;
 import com.example.letscode.service.AlunoService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -38,14 +40,32 @@ class AlunoControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    private AlunoDto alunoDto;
+    private Aluno aluno;
+    private Aluno alunoAddList;
+    private Aluno alunoAddList2;
+    private List<Aluno> alunoList;
+
+    @BeforeEach
+    public void inicializar(){
+        alunoDto = new AlunoDto(1, "Alisson", "MTLA122395", LocalDate.now());
+        aluno = new Aluno();
+        aluno.setId(alunoDto.getId());
+        aluno.setNome(alunoDto.getNome());
+        aluno.setDataNascimento(alunoDto.getDataNascimento());
+        aluno.setMatricula(alunoDto.getMatricula());
+
+        alunoAddList = new Aluno("Amora", "MTLA120385", LocalDate.now());
+        alunoAddList2 = new Aluno("Amanda", "MTLA220365", LocalDate.now());
+        alunoList = new ArrayList<>();
+        alunoList.add(alunoAddList);
+        alunoList.add(alunoAddList2);
+
+    }
+
     @Test
     @WithMockUser
     void listarTodosAlunos() throws Exception {
-
-        List<Aluno> alunoList = new ArrayList<>();
-        alunoList.add(new Aluno("Alan", "MTLA125478", LocalDate.now()));
-        alunoList.add(new Aluno("Mateus", "MTLA125471", LocalDate.now()));
-        alunoList.add(new Aluno("João", "MTLA125479", LocalDate.now()));
 
         Mockito.when(alunoService.listarTodos()).thenReturn(alunoList);
         this.mockMvc.perform(
@@ -60,14 +80,6 @@ class AlunoControllerTest {
     @WithMockUser
     void salvarAlunoTestController() throws Exception {
 
-        AlunoDto alunoDto = new AlunoDto(1, "Nome", "MTLA120395", LocalDate.now());
-
-        Aluno aluno = new Aluno();
-        aluno.setId(alunoDto.getId());
-        aluno.setNome(alunoDto.getNome());
-        aluno.setDataNascimento(alunoDto.getDataNascimento());
-        aluno.setMatricula(alunoDto.getMatricula());
-
         Mockito.when(alunoService.salvarAluno(aluno))
                 .thenReturn(aluno);
 
@@ -79,31 +91,7 @@ class AlunoControllerTest {
 
     @Test
     @WithMockUser
-    void listarTodosOsAlunosTestController() throws Exception {
-
-        List<Aluno> alunoList = new ArrayList<>();
-        alunoList.add(new Aluno("Mateus", "MTLA478569", LocalDate.now()));
-        alunoList.add(new Aluno("Marcos", "MTLA878569", LocalDate.now()));
-
-        Mockito.when(alunoService.listarTodos()).thenReturn(alunoList);
-
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/aluno"))
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isOk());
-    }
-
-    @Test
-    @WithMockUser
     void deletarAlunoTestController() throws Exception {
-
-
-        AlunoDto alunoDto = new AlunoDto(1, "Nome", "MTLA120395", LocalDate.now());
-
-        Aluno aluno = new Aluno();
-        aluno.setId(alunoDto.getId());
-        aluno.setNome(alunoDto.getNome());
-        aluno.setDataNascimento(alunoDto.getDataNascimento());
-        aluno.setMatricula(alunoDto.getMatricula());
 
         Mockito.when(alunoService.deletarAluno(aluno.getId())).thenReturn(aluno);
 
@@ -117,6 +105,22 @@ class AlunoControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string("Aluno deletado com sucesso"));
 
+
+    }
+
+    @Test
+    @WithMockUser
+    void buscarAlunoTestController() throws Exception {
+
+        Mockito.when(alunoService.selecionarAlunoById(aluno.getId())).thenReturn(aluno);
+        this.mockMvc.perform(
+                        MockMvcRequestBuilders
+                                .get("/aluno/1")
+                                .accept(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
+
+                )
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk());
 
     }
 }
