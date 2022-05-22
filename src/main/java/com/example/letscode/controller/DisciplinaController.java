@@ -33,14 +33,14 @@ public class DisciplinaController {
     @GetMapping
     public List<DisciplinaDto> listarDisciplinas(){
         return this.disciplinaService.listarTodos().stream()
-                .map(this.dtoChange::DisciplinaToDisciplinaDto)
+                .map(this.dtoChange::disciplinaToDisciplinaDto)
                 .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity selecionarDisciplinaById(@PathVariable("id") Integer id){
         var disciplina =  this.disciplinaService.selecionarDisciplinaById(id);
-        var disciplinaDto = this.dtoChange.DisciplinaToDisciplinaDto(disciplina);
+        var disciplinaDto = this.dtoChange.disciplinaToDisciplinaDto(disciplina);
         return new ResponseEntity(disciplinaDto, HttpStatus.OK);
     }
 
@@ -48,7 +48,7 @@ public class DisciplinaController {
     public ResponseEntity atualizarDisciplina(@PathVariable("id") Integer idDisciplina, @RequestBody DisciplinaDto disciplinaDto){
         var disciplina = this.dtoChange.disciplinaDtoToDisciplina(disciplinaDto);
         var disciplina2 = this.disciplinaService.alterarDisciplina(idDisciplina, disciplina);
-        var disciplinaDtoAtt = this.dtoChange.DisciplinaToDisciplinaDto(disciplina2);
+        var disciplinaDtoAtt = this.dtoChange.disciplinaToDisciplinaDto(disciplina2);
         return new ResponseEntity(disciplinaDtoAtt, HttpStatus.OK);
     }
 

@@ -46,7 +46,7 @@ public class DtoChange {
         var professor = this.professorService.selecionarProfessor(disciplinaDto.getProfessor_id());
         return new Disciplina(disciplinaDto.getId(), disciplinaDto.getNome(), professor);
     }
-    public DisciplinaDto DisciplinaToDisciplinaDto(Disciplina disciplina) {
+    public DisciplinaDto disciplinaToDisciplinaDto(Disciplina disciplina) {
         return new DisciplinaDto(disciplina.getId(),disciplina.getNome(),disciplina.getProfessor().getId());
     }
 
