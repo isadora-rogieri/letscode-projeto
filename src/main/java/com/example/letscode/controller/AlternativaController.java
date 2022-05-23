@@ -61,6 +61,6 @@ public class AlternativaController {
     @DeleteMapping("{id}")
     public ResponseEntity deletarAlternativa(@PathVariable("id") Integer id){
         this.alternativaService.deletarAlternativa(id);
-        return ResponseEntity.ok("Questão deletada com sucesso.");
+        return ResponseEntity.ok("Alternativa deletada com sucesso");
     }
 }

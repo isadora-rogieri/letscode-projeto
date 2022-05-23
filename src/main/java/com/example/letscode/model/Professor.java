@@ -1,13 +1,11 @@
 package com.example.letscode.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+@AllArgsConstructor
 @ToString
 @NoArgsConstructor
 @Getter
