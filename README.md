@@ -14,17 +14,16 @@ do sistema previamente criado.
 
 ### Planejamento do desenvolvimento:
 
-     ⬛ Criar os casos de teste
+     ✔ Criar os casos de teste
         Baseado nesses casos, desenvolver:
-         ⬜ Testes unitarios
-         ⬜ Testes de integração
-         ⬜ novas funcionalidades usando a metodologia TDD
+         ✅ Testes unitarios
+         ✅ Testes de integração
           
 ### Objetivos:
 
-    🔴 70% Cobertura de codigo
-    🔴 Implementacao da metodologia TDD
-    🔴 Ferramentas: JUNIT, MOCKITO e SONARQUBE
+    🟢 70% Cobertura de codigo
+    🟢 Ferramentas: JUNIT, MOCKITO e SONARQUBE
+    🟡 Implementacao da metodologia TDD
     
     
     
