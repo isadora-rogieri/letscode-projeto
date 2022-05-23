@@ -100,4 +100,51 @@ public class QuestaoControllerTest {
         Assertions.assertEquals(questaoDto.getDisciplina_id(), questao.getDisciplina().getId());
     }
 
+    @Test
+    void deveRetornarMensagemDeQuestaoDeletada() throws Exception {
+
+        Disciplina disciplina = new Disciplina(1, "disciplina teste", new Professor("José"));
+        Questao questao = new Questao(1,"Questao 1", disciplina);
+
+        Mockito.when(questaoService.buscarQuestaoporId(1))
+                .thenReturn(questao);
+
+        this.mockMvc.perform(MockMvcRequestBuilders
+                        .delete("/questoes/1")
+
+                )
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string("Questão deletada com sucesso."));
+
+        Assertions.assertEquals(1, questao.getId());
+        Mockito.verify(questaoService).deletarQuestao(1);
+
+    }
+
+    @Test
+    void deveRetornarQuestaoDtoComOId() throws Exception {
+
+        Disciplina disciplina = new Disciplina(1, "disciplina teste", new Professor("José"));
+        Questao questao = new Questao(1,"Questao 1", disciplina);
+        QuestaoDto questaoDto = new QuestaoDto(1,"Questao 1", 1);
+
+        Mockito.when(questaoService.buscarQuestaoporId(1))
+                .thenReturn(questao);
+        Mockito.when(dtoChange.questaoToQuestaoDto(questao))
+                .thenReturn(questaoDto);
+
+        this.mockMvc.perform(MockMvcRequestBuilders
+                        .get("/questoes/1")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(jsonPath("$.id", Matchers.is(questao.getId()), Integer.class))
+                .andExpect(jsonPath("$.enunciado", Matchers.is(questao.getEnunciado()), String.class))
+                .andExpect(jsonPath("$.disciplina_id", Matchers.is(questao.getDisciplina().getId()), Integer.class));
+    }
+
+
 }

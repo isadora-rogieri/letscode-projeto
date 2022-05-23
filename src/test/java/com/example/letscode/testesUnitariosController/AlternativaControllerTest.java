@@ -212,6 +212,7 @@ class AlternativaControllerTest {
                 .andExpect(MockMvcResultMatchers.content().string(ALTERNATIVA_DELETADA_MESSAGE));
 
         Assertions.assertEquals(5, alternativa.getId());
+        Mockito.verify(alternativaService).deletarAlternativa(5);
 
     }
 
