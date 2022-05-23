@@ -41,7 +41,7 @@ public class QuestaoController {
     public ResponseEntity salvarQuestao(@Valid @RequestBody QuestaoDto questaoDto){
         var questao = this.dtoChange.questaoDtoToQuestao(questaoDto);
         this.questaoService.salvarQuestao(questao);
-        return new ResponseEntity("Questão salva com sucesso!", HttpStatus.CREATED);
+        return new ResponseEntity("Questao salva com sucesso!", HttpStatus.CREATED);
     }
 
     @PutMapping("{id}")
